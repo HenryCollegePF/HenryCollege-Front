@@ -1,4 +1,4 @@
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import React from "react";
 import imageGirl from "../../assets/images/LandingGirl.jpg";
 import Footer from "../../components/footer/Footer";
