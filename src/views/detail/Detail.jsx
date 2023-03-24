@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import { useDispatch, useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import CustomizedRating from "../../components/Rating/Rating";
+import CustomizedRating from "../../components/rating/Rating";
 import { useParams } from "react-router-dom";
 import { getCoursesById } from "../../redux/store/slices/courses/getAllCourses";
 
