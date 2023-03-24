@@ -11,7 +11,7 @@ export const getAllUsers = () => {
       let res = await axios.get(`${URL}/students`);
       dispatch(setUserList(res.data));
     } catch (error) {
-      console.log("error_redux", error);
+      console.log("error_getAllUSers", error);
     }
   };
 };

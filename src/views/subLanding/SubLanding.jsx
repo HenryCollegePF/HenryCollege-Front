@@ -1,4 +1,4 @@
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import React from "react";
 import image from "../../assets/images/SubLanding.jpg";
 import Footer from "../../components/footer/Footer";

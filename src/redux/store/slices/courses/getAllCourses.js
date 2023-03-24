@@ -9,7 +9,6 @@ import {
 export const FILTER_BY_CREATOR = "FILTER_BY_CREATOR";
 export const GET_FILTER = "GET_FILTER";
 
-
 const URL = import.meta.env.VITE_BACK_URL;
 
 //Get All Courses
@@ -19,8 +18,9 @@ export const getAllCourses = () => {
     try {
       let res = await axios.get(`${URL}/course`);
       dispatch(setcoursesList(res.data));
+      console.log("aqui", res);
     } catch (error) {
-      console.log("error_redux", error);
+      console.log("error_aqui", error);
     }
   };
 };
