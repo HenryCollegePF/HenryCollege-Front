@@ -9,7 +9,7 @@ export const coursesSlice = createSlice({
   },
   reducers: {
     setcoursesList: (state, action) => {
-      return { ...state, list: action.payload.results }; // update list to an array
+      state.list = action.payload; // update list to an array
     },
     postCourses: (state, action) => {
       state.data = action.payload;

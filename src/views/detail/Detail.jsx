@@ -25,16 +25,15 @@ export default function Detail() {
         <Card sx={{ display: "flex" }}>
           <Box sx={{ display: "flex", flexDirection: "column" }} color="tertiary">
             <Box sx={{ width: "100%", height: "100%" }} color="tertiary">
-              {/* <iframe
+              <iframe
                 width="560"
                 height="400"
                 src={detail[0].videoSrc}
                 title="YouTube video player"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 color="tertiary"
-              ></iframe> */}
+              ></iframe>
             </Box>
           </Box>
           <Box sx={{ display: "flex", flexDirection: "column" }} m="30px">

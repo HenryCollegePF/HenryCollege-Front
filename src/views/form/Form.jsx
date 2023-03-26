@@ -18,6 +18,8 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { setAuthToken } from "../../utils/auth";
 
 function Form() {
   const [loading, setLoading] = useState(false);
@@ -25,8 +27,6 @@ function Form() {
     email: "",
     password: "",
   });
-
-  const { email, password } = formData;
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -41,13 +41,13 @@ function Form() {
   //   setFormData({...formData, [e.target.name]: e.target.value});
   // }
 
-  const handleSubmit = (email, password) => {
-    console.log(email, password);
-    setLoading(true);
-    alert(`datos iniciar sesion:::, ${email}, ${password}`);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+  const handleSubmit = async () => {
+    const { data } = await axios.post('http://localhost:3001/students/login', {
+      email: formData.email,
+      password: formData.password,
+    });
+
+    setAuthToken(data.auth.access_token)
   };
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -71,7 +71,7 @@ function Form() {
   useEffect(() => {
     // Save form data to localStorage whenever it changes
     localStorage.setItem("formData", JSON.stringify(formData));
-    console.log("Saved form data to local storage:", formData);
+    // console.log("Saved form data to local storage:", formData);
   }, [formData]);
 
   return (
@@ -84,7 +84,7 @@ function Form() {
                 <Grid item xs={12} sm={12} md={20} lg={20} xl={20}>
                   <TextField
                     name="email"
-                    value={email}
+                    value={formData.email}
                     onChange={handleOnChange}
                     error={false}
                     label="Correo electrónico"
@@ -97,8 +97,7 @@ function Form() {
                 </Grid>
 
                 <FormControl
-                  name="password"
-                  value={password}
+                  value={formData.password}
                   onChange={handleOnChange}
                   error={false}
                   label="Contraseña"
@@ -113,6 +112,7 @@ function Form() {
                   </InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-password"
+                    name="password"
                     type={showPassword ? "text" : "password"}
                     endAdornment={
                       <InputAdornment position="end">
@@ -138,7 +138,7 @@ function Form() {
                   <LoadingButton
                     variant="contained"
                     type="submit"
-                    onClick={() => handleSubmit(email, password)}
+                    onClick={handleSubmit}
                     loading={loading}
                     disabled={!loading ? false : true}
                     style={{ width: 300 }}

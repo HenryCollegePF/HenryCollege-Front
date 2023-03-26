@@ -1,14 +1,21 @@
 import axios from "axios";
 import { setUserList, postUser } from ".";
+import { getAuthToken } from "../../../../utils/auth";
 
-const URL = import.meta.env.VITE_BACK_URL;
+const URL = "http://localhost:3001";
+// import.meta.env.VITE_BACK_URL;
 
 //Get users
 
 export const getAllUsers = () => {
   return async (dispatch) => {
     try {
-      let res = await axios.get(`${URL}/students`);
+      const token = getAuthToken();
+      const res = await axios.get(`${URL}/students`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch(setUserList(res.data));
     } catch (error) {
       console.log("error_getAllUSers", error);

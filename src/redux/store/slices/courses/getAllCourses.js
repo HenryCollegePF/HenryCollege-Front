@@ -6,10 +6,11 @@ import {
   getCourseByName,
   getPageCourse,
 } from ".";
+import { getAuthToken } from "../../../../utils/auth";
 export const FILTER_BY_CREATOR = "FILTER_BY_CREATOR";
 export const GET_FILTER = "GET_FILTER";
 
-const URL = import.meta.env.VITE_BACK_URL;
+const URL = "http://localhost:3001";
 
 //Get All Courses
 
@@ -17,10 +18,9 @@ export const getAllCourses = () => {
   return async (dispatch) => {
     try {
       let res = await axios.get(`${URL}/course`);
-      dispatch(setcoursesList(res.data));
-      console.log("aqui", res);
+      dispatch(setcoursesList(res.data.results));
     } catch (error) {
-      console.log("error_aqui", error);
+      console.log(error);
     }
   };
 };
@@ -34,7 +34,7 @@ export const postNewCourse = (course) => {
       dispatch(postCourses(response.data));
       alert("Curso nuevo publicado exitosamente");
     } catch (error) {
-      console.log("error_redux", error);
+      console.log(error);
     }
   };
 };
@@ -44,10 +44,15 @@ export const postNewCourse = (course) => {
 export const getCoursesById = (id) => {
   return async (dispatch) => {
     try {
-      let res = await axios.get(`${URL}/course/${id}`);
+      const token = getAuthToken();
+      let res = await axios.get(`${URL}/course/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch(getCourseById(res.data));
     } catch (error) {
-      console.log("error_redux", error);
+      console.log(error);
     }
   };
 };
@@ -60,7 +65,7 @@ export const getCoursesByName = (name) => {
       let res = await axios.get(`${URL}/course?name=${name}`);
       dispatch(getCourseByName(res.data.results));
     } catch (error) {
-      console.log("error_redux", error);
+      console.log(error);
     }
   };
 };
@@ -71,7 +76,7 @@ export const changePageCourses = (page) => {
       let res = await axios.get(`${URL}/course?page=${page}`);
       dispatch(getPageCourse(res.data));
     } catch (error) {
-      console.log("error_redux", error);
+      console.log(error);
     }
   };
 };
@@ -82,7 +87,7 @@ export const filtersByAlpha = (sortName) => {
       let res = await axios.get(`${URL}/course?sortName=${sortName}`);
       dispatch(setcoursesList(res.data));
     } catch (error) {
-      console.log("error_redux", error);
+      console.log(error);
     }
   };
 };
@@ -93,7 +98,7 @@ export const filtersByLevel = (level) => {
       let res = await axios.get(`${URL}/course?level=${level}`);
       dispatch(setcoursesList(res.data)); //setcoursesList me actualiza el estado global
     } catch (error) {
-      console.log("error_redux", error);
+      console.log(error);
     }
   };
 };
@@ -103,7 +108,7 @@ export const filtersByMin = (sortDuration) => {
       let res = await axios.get(`${URL}/course?sortDuration=${sortDuration}`);
       dispatch(setcoursesList(res.data)); //setcoursesList me actualiza el estado global
     } catch (error) {
-      console.log("error_redux", error);
+      console.log(error);
     }
   };
 };

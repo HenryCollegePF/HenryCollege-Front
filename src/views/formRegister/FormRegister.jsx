@@ -13,9 +13,6 @@ import * as React from "react";
 import { postNewUser } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
 
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
 const FormRegister = () => {
   const dispatch = useDispatch();
 
@@ -46,18 +43,6 @@ const FormRegister = () => {
       ? alert("La contraseña no coincide")
       : dispatch(postNewUser(input));
   };
-
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [confirmPassword, setConfirmPassword] = React.useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleConfirmPasswordChange = () => setConfirmPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  }
-
-  console.log(input.password, confirmPas)
 
     return (
       <Box
