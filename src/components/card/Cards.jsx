@@ -42,7 +42,7 @@ export default function Cards({ id, name, image, level, tags, duration }) {
         }}
         color="tertiary"
       >
-        <Link to={`/henrycollege/payment`} color="tertiary">
+        <Link to={`/henrycollege/detalle/${id}`} color="tertiary">
           <CardActionArea color="tertiary">
             <CardMedia
               sx={{ height: "10%", width: "80%", m: "auto", mt: "1rem" }}
