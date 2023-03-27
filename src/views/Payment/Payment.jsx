@@ -46,7 +46,7 @@ const ProductDisplay = () => {
     const paymentDetails = await actions.order.capture();
     const name = paymentDetails.payer.name.given_name;
     dispatch(postPayment(paymentDetails)); // => Va a decirle al back quien hizo la compra y el id de esa compra
-		navigate('/courses')
+		navigate('/henrycollege/courses')
   };
 
   if (payment.paid.status === "COMPLETED") {
