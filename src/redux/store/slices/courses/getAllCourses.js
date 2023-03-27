@@ -10,7 +10,7 @@ import { getAuthToken } from "../../../../utils/auth";
 export const FILTER_BY_CREATOR = "FILTER_BY_CREATOR";
 export const GET_FILTER = "GET_FILTER";
 
-const URL = "http://localhost:3001";
+const URL = import.meta.env.VITE_BACK_URL || "http://localhost:3001";
 
 //Get All Courses
 

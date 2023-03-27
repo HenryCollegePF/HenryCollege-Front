@@ -45,7 +45,7 @@ export default function Cards({ id, name, image, level, tags, duration }) {
         <Link to={`/henrycollege/detalle/${id}`} color="tertiary">
           <CardActionArea color="tertiary">
             <CardMedia
-              sx={{ height: "10%", width: "80%", m: "auto", mt: "1rem" }}
+              sx={{ height: "130px", width: "80%", m: "auto", mt: "1rem" }}
               component="img"
               image={image}
               display="flex"
@@ -89,34 +89,6 @@ export default function Cards({ id, name, image, level, tags, duration }) {
           justifycontent="center"
           alignItems="center"
         >
-          <CardActions>
-            <Box width={100}>
-              <Button
-                color="tertiary"
-                sx={{ fontSize: "10px", bgcolor: "#FFFF01" }}
-              >
-                Comprar
-              </Button>
-            </Box>
-
-            <Box width={100}>
-              <Link to={"/henrycollege/registrarse"}>
-                <Button
-                  sx={{
-                    fontSize: "10px",
-                    bgcolor: "#000000",
-                    "&:hover": {
-                      bgcolor: "#F0F0F0",
-                      color: "#000000",
-                    },
-                  }}
-                  color="secondary"
-                >
-                  Registrarse
-                </Button>
-              </Link>
-            </Box>
-          </CardActions>
         </Box>
       </Card>
     </Box>

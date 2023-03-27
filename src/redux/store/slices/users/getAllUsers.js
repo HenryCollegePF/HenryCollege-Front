@@ -2,8 +2,7 @@ import axios from "axios";
 import { setUserList, deleteToken, logUser } from ".";
 import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
-const URL = "http://localhost:3001";
-// import.meta.env.VITE_BACK_URL;
+const URL = import.meta.env.VITE_BACK_URL || "http://localhost:3001";
 
 //Get users
 

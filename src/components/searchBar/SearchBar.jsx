@@ -108,7 +108,7 @@ export default function SearchBar() {
               id={course.id}
               name={course.name}
               tags={course.tags}
-              image={course.image}
+              image={course.imageSrc}
               key={course.id}
               level={course.level}
             />
