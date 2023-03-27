@@ -38,7 +38,7 @@ function App() {
         
         <Routes>
           <Route exact path="/" element={<Landing/>} />
-          <Route exact path="/courses" element={<SubLanding/>} />
+          {/* <Route exact path="/courses" element={<SubLanding/>} /> */}
           <Route exact path="/henrycollege" element={<SubLanding/>} />
           <Route exact path="/henrycollege/courses" element={<Home/>} />
           <Route exact path="/henrycollege/registrarse" element={<FormRegister/>} />

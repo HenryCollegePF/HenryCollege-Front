@@ -9,9 +9,12 @@ export const userSlice = createSlice({
     setPaid: (state, action) => {
       state.paid = action.payload;
     },
+    clearSubscription: (state, action) => {
+      state.paid = {};
+    },
   },
 });
 
-export const { setPaid } = userSlice.actions;
+export const { setPaid, clearSubscription } = userSlice.actions;
 
 export default userSlice.reducer;

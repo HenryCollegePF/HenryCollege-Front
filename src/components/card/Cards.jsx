@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Cards({ id, name, image, level, tags, duration }) {
   const buttonSx = {
@@ -19,6 +20,10 @@ export default function Cards({ id, name, image, level, tags, duration }) {
       bgcolor: "#000000",
     },
   };
+
+  const paymentState = useSelector(state=>state.paymentState)
+
+  const isPaid = paymentState.paid.status === "COMPLETED"
 
   return (
     <Box
@@ -42,7 +47,7 @@ export default function Cards({ id, name, image, level, tags, duration }) {
         }}
         color="tertiary"
       >
-        <Link to={`/henrycollege/detalle/${id}`} color="tertiary">
+        <Link to={isPaid? `/henrycollege/detalle/${id}`: "/henrycollege/payment"} color="tertiary">
           <CardActionArea color="tertiary">
             <CardMedia
               sx={{ height: "130px", width: "80%", m: "auto", mt: "1rem" }}

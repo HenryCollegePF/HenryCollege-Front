@@ -9,6 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import { logout } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
+import { removeSubscription } from "../../redux/store/slices/payment/paymentSlice";
 
 const settings = ['Profile','Logout'];
 
@@ -35,7 +36,9 @@ const NavBar = () => {
   };
 
   const handlerLogout = () =>{
-    navigate('/')
+    dispatch(removeSubscription())
+    dispatch(logout())
+    navigate('/henrycollege')
   }
 
   return (

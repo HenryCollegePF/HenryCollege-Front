@@ -35,22 +35,6 @@ function Form() {
     dispatch(loginUser(formData))
   };
 
-  // useEffect(() => {
-  //   // Retrieve form data from localStorage, if available
-  //   const storedFormData = JSON.parse(localStorage.getItem("formData"));
-
-  //   if (storedFormData) {
-  //     console.log("Retrieved form data from local storage:", storedFormData);
-  //     setFormData(storedFormData);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   // Save form data to localStorage whenever it changes
-  //   localStorage.setItem("formData", JSON.stringify(formData));
-  //   // console.log("Saved form data to local storage:", formData);
-  // }, [formData]);
-
   return (
     <div className={styles.container}>
       <header className={styles.header}>

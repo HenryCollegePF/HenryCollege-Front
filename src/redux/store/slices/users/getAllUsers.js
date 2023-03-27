@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setUserList, deleteToken, logUser } from ".";
+import { setUserList, logoutUser, logUser } from ".";
 import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
 const URL = import.meta.env.VITE_BACK_URL || "http://localhost:3001";
@@ -50,5 +50,5 @@ export const loginUser = (user) => {
 };
 
 export const logout = () => (dispatch) => {
-  return dispatch(deleteToken());
+  return dispatch(logoutUser());
 };

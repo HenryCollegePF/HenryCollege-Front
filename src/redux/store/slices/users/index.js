@@ -12,8 +12,8 @@ export const userSlice = createSlice({
     setUserList: (state, action) => {
       state.list = action.payload;
     },
-    deleteToken: (state, action) => {
-      state.authToken = [];
+    logoutUser: (state, action) => {
+      state.loggedUser = null;
     },
     logUser: (state, action) => {
       state.loggedUser = action.payload;
@@ -21,6 +21,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserList, deleteToken, logUser } = userSlice.actions;
+export const { setUserList, logoutUser, logUser } = userSlice.actions;
 
 export default userSlice.reducer;
