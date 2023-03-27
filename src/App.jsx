@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom"
 import './App.css'
 import NavBar from './components/navBar/NavBar'
-import { About, Detail, Form, Home, Landing, SubLanding, UserDashboard, FormRegister } from './views'
+import { About, Detail, Form, Home, Landing, SubLanding, FormRegister, Payment } from './views'
 import React from "react"
 
 function App() {
@@ -15,7 +15,6 @@ function App() {
         
         <Routes>
           <Route exact path="/" element={<Landing/>} />
-          <Route exact path="/dashboard" element={<UserDashboard/>} />
           <Route exact path="/courses" element={<SubLanding/>} />
           <Route exact path="/henrycollege" element={<SubLanding/>} />
           <Route exact path="/henrycollege/courses" element={<Home/>} />
@@ -23,6 +22,7 @@ function App() {
           <Route exact path="/henrycollege/iniciarsesion" element={<Form/>} />
           <Route exact path="/henrycollege/nosotros" element={<About/>} />          
           <Route exact path="/henrycollege/detalle/:id" element={<Detail/>} />          
+          <Route exact path="/henrycollege/payment" element={<Payment/>} />          
         </Routes> 
 
         

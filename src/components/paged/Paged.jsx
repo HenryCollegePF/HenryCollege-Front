@@ -16,6 +16,7 @@ const Paged = () => {
   useEffect(() => {
     dispatch(changePageCourses(page));
   }, [dispatch, page]);
+  
   const {list} = useSelector((state) => state.courseState);
 
   return (

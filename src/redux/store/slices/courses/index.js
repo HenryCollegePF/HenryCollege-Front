@@ -6,10 +6,12 @@ export const coursesSlice = createSlice({
     list: [], // initialize list to an empty array
     courseById: [],
     courseByName: [],
+    coursePage: {},
+    data: [],
   },
   reducers: {
     setcoursesList: (state, action) => {
-      state.list = action.payload; // update list to an array
+      return { ...state, list: action.payload.results }; // update list to an array
     },
     postCourses: (state, action) => {
       state.data = action.payload;

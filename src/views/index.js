@@ -4,7 +4,16 @@ import Home from "./home/Home";
 import Landing from "./landing/Landing";
 import SubLanding from "./subLanding/SubLanding";
 import About from "./about/about";
-import UserDashboard from "./userDashboard/UserDashboard";
 import FormRegister from "./formRegister/FormRegister";
+import Payment from "./Payment/Payment";
 
-export { Detail, Form, Home, Landing, About, SubLanding, UserDashboard, FormRegister };
+export {
+  Detail,
+  Form,
+  Home,
+  Landing,
+  About,
+  SubLanding,
+  FormRegister,
+  Payment,
+};

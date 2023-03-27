@@ -4,24 +4,19 @@ import {
   Box,
   Card,
   CardContent,
-  FormControl,
-  FormHelperText,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  IconButton,
   Button,
 } from "@mui/material";
 import styles from "./Form.module.css";
 import React, { useEffect, useState } from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import { setAuthToken } from "../../utils/auth";
+import { loginUser } from "../../redux/store/slices/users/getAllUsers";
+import { useDispatch } from "react-redux";
 
 function Form() {
+
+  const dispatch = useDispatch()
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -35,44 +30,26 @@ function Form() {
       [name]: value,
     }));
   };
-
-  // const handleOnChange = (e) => {
-  //   // console.log([e.target.name], e.target.value)
-  //   setFormData({...formData, [e.target.name]: e.target.value});
-  // }
-
-  const handleSubmit = async () => {
-    const { data } = await axios.post('http://localhost:3001/students/login', {
-      email: formData.email,
-      password: formData.password,
-    });
-
-    setAuthToken(data.auth.access_token)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(loginUser(formData))
   };
 
-  const [showPassword, setShowPassword] = React.useState(false);
+  // useEffect(() => {
+  //   // Retrieve form data from localStorage, if available
+  //   const storedFormData = JSON.parse(localStorage.getItem("formData"));
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  //   if (storedFormData) {
+  //     console.log("Retrieved form data from local storage:", storedFormData);
+  //     setFormData(storedFormData);
+  //   }
+  // }, []);
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  useEffect(() => {
-    // Retrieve form data from localStorage, if available
-    const storedFormData = JSON.parse(localStorage.getItem("formData"));
-
-    if (storedFormData) {
-      console.log("Retrieved form data from local storage:", storedFormData);
-      setFormData(storedFormData);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Save form data to localStorage whenever it changes
-    localStorage.setItem("formData", JSON.stringify(formData));
-    // console.log("Saved form data to local storage:", formData);
-  }, [formData]);
+  // useEffect(() => {
+  //   // Save form data to localStorage whenever it changes
+  //   localStorage.setItem("formData", JSON.stringify(formData));
+  //   // console.log("Saved form data to local storage:", formData);
+  // }, [formData]);
 
   return (
     <div className={styles.container}>
@@ -96,45 +73,19 @@ function Form() {
                   />
                 </Grid>
 
-                <FormControl
-                  value={formData.password}
-                  onChange={handleOnChange}
-                  error={false}
-                  label="Contraseña"
-                  type="text"
-                  fullWidth
-                  variant="outlined"
-                  sx={{ m: 2, width: 300 }}
-                  color="tertiary"
-                >
-                  <InputLabel htmlFor="outlined-adornment-password">
-                    Contraseña
-                  </InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-password"
+                <TextField
+                    id="outlined-password-input"
+                    label="Password"
+                    type="password"
+                    autoComplete="current-password"
                     name="password"
-                    type={showPassword ? "text" : "password"}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Contraseña"
+                    sx={{ width: 300, mt:'1rem' }}
                     color="tertiary"
+                    value={formData.password}
+                    onChange={handleOnChange}
                   />
-                  <FormHelperText id="outlined-password-helper-text">
-                    Campo obligatorio
-                  </FormHelperText>
-                </FormControl>
 
-                <Box sx={{ "& > button": { m: 1 } }}>
+                <Box sx={{ "& > button": { m: 1 ,mt:'1rem'} }}>
                   <LoadingButton
                     variant="contained"
                     type="submit"

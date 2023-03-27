@@ -4,10 +4,42 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
+import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
+import { logout } from "../../redux/store/slices/users/getAllUsers";
+import { useDispatch } from "react-redux";
+
+const settings = ['Profile','Logout'];
 
 const NavBar = () => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handlerLogout = () =>{
+    navigate('/')
+  }
+
   return (
+
     <AppBar position="fixed" color="secondary">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box display="flex" alignItems="center">
@@ -54,14 +86,6 @@ const NavBar = () => {
             </Button>
           </Link>
 
-          <Link to={"/dashboard"} color="inherit">
-            <Button
-              sx={{ mr: 2, color: "black", bgcolor: "#f5f5f5" }}
-              color="inherit"
-            >
-              Dashboard
-            </Button>
-          </Link>
           <Link to={"/henrycollege/registrarse"}>
             <Button
               sx={{
@@ -96,6 +120,35 @@ const NavBar = () => {
             </Button>
           </Link>
         </Box>
+        <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center" onClick={handlerLogout}>{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
       </Toolbar>
     </AppBar>
   );

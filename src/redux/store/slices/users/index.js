@@ -6,17 +6,21 @@ export const userSlice = createSlice({
   initialState: {
     list: [],
     data: {},
+    loggedUser: {},
   },
   reducers: {
     setUserList: (state, action) => {
       state.list = action.payload;
     },
-    postUser: (state, action) => {
-      state.data = action.payload;
+    deleteToken: (state, action) => {
+      state.authToken = [];
+    },
+    logUser: (state, action) => {
+      state.loggedUser = action.payload;
     },
   },
 });
 
-export const { setUserList, postUser } = userSlice.actions;
+export const { setUserList, deleteToken, logUser } = userSlice.actions;
 
 export default userSlice.reducer;

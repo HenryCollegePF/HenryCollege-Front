@@ -18,7 +18,7 @@ export const getAllCourses = () => {
   return async (dispatch) => {
     try {
       let res = await axios.get(`${URL}/course`);
-      dispatch(setcoursesList(res.data.results));
+      dispatch(setcoursesList(res.data));
     } catch (error) {
       console.log(error);
     }

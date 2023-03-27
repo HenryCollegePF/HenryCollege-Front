@@ -1,6 +1,6 @@
 import axios from "axios";
-import { setUserList, postUser } from ".";
-import { getAuthToken } from "../../../../utils/auth";
+import { setUserList, deleteToken, logUser } from ".";
+import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
 const URL = "http://localhost:3001";
 // import.meta.env.VITE_BACK_URL;
@@ -28,11 +28,28 @@ export const getAllUsers = () => {
 export const postNewUser = (user) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`${URL}/students`, user);
-      dispatch(postUser(res.data));
-      alert("Registro exitoso");
+      await axios.post(`${URL}/students`, user);
+      alert("Registro exitoso 🎉🎉🎉");
     } catch (error) {
-      console.log("error_redux", error);
+      console.log("err_post_slice", error);
     }
   };
+};
+
+export const loginUser = (user) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${URL}/students/login`, user);
+
+      setAuthToken(data.auth.access_token);
+      dispatch(logUser(data));
+    } catch (error) {
+      alert("No estas registrado, por favor registrate 😊");
+      console.log("err_login_slice", error);
+    }
+  };
+};
+
+export const logout = () => (dispatch) => {
+  return dispatch(deleteToken());
 };
