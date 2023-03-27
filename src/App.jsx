@@ -3,10 +3,33 @@ import './App.css'
 import NavBar from './components/navBar/NavBar'
 import { About, Detail, Form, Home, Landing, SubLanding, FormRegister, Payment } from './views'
 import React from "react"
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { Paper, Switch } from "@mui/material"
 
 function App() {
-
+  // const [isDark, setIsDark] = useState(false)
   const location = useLocation();
+
+  // const theme = createTheme({
+  //   palette: {
+  //     type: isDark ? "dark" : "light",
+  //     primary: {
+  //       main: "#FFFF01", //amarillo
+  //       contrastText: "black", // color de texto secundario
+  //     },
+  //     secondary: {
+  //       main: "#fafafa", //blanco
+  //       contrastText: "black", // color de texto secundario
+  //     },
+  //     tertiary: {
+  //       main: "#000000", //negro
+  //       contrastText: "white", // color de texto secundario
+  //     },
+  //     background: {
+  //       paper: "#fafafa", //negro
+  //     },
+  //   },
+  // });
 
   return (
 

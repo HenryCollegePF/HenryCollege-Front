@@ -50,14 +50,12 @@ const NavBar = () => {
               alt="logo"
             />
           </Link>
-
           <Link to="/henrycollege">
             <Typography color="black" variant="h6" sx={{ flexGrow: 1 }}>
               | College
             </Typography>
           </Link>
         </Box>
-
         <Box display="flex" alignItems="center">
           <Link to={"/"} color="inherit">
             <Button
@@ -102,7 +100,7 @@ const NavBar = () => {
               Crear Cuenta
             </Button>
           </Link>
-          
+
           <Link to={"/henrycollege/iniciarsesion"}>
             <Button
               sx={{
