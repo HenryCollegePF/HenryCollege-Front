@@ -75,38 +75,74 @@ const Item = styled(Paper)(({ theme }) => ({
 const darkTheme = createTheme({ palette: { mode: 'dark' } });
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
+// export default function Elevation() {
+//   return (
+//     <>
+//     <Typography variant="h4" gutterBottom>Equipo Henry College</Typography>
+//     <Grid container spacing={2} >
+//       {[lightTheme].map((theme, index) => (
+//         <Grid item xs={30} key={index}>
+//           <ThemeProvider theme={theme}>
+//             <Box
+//               sx={{
+//                 mb:6,
+//                 bgcolor: 'background.default',
+//                 display: 'grid',
+//                 gridTemplateColumns: { md: '1fr 1fr 1fr 1fr' },
+//                 gap: 6,
+//                 height: 350
+//               }}
+//             >
+//               {avatar.map((elevation) => (
+//                 <Item key={elevation} elevation={elevation} sx={{width : 200}}>
+//                   <Avatar src={elevation.imageUrl} sx={{ width: 150, height: 150 }} />
+//                   <Typography>{elevation.name}</Typography>
+//                   <a href={elevation.link}target="_blank" rel="noopener noreferrer">
+//                     <Typography sx={{ color: "blue" }} >Linkedin</Typography>
+//                   </a>
+//                 </Item>
+//               ))}
+//             </Box>
+//           </ThemeProvider>
+//         </Grid>
+//       ))}
+//     </Grid>
+//     </>
+//   );
+// }
 export default function Elevation() {
   return (
     <>
-    <Typography variant="h4" gutterBottom>Equipo Henry College</Typography>
-    <Grid container spacing={2} >
-      {[lightTheme].map((theme, index) => (
-        <Grid item xs={30} key={index}>
-          <ThemeProvider theme={theme}>
-            <Box
-              sx={{
-                mb:6,
-                bgcolor: 'background.default',
-                display: 'grid',
-                gridTemplateColumns: { md: '1fr 1fr 1fr 1fr' },
-                gap: 6,
-                height: 350
-              }}
-            >
-              {avatar.map((elevation) => (
-                <Item key={elevation} elevation={elevation} sx={{width : 200}}>
-                  <Avatar src={elevation.imageUrl} sx={{ width: 150, height: 150 }} />
-                  <Typography>{elevation.name}</Typography>
-                  <a href={elevation.link}target="_blank" rel="noopener noreferrer">
-                    <Typography sx={{ color: "blue" }} >Linkedin</Typography>
-                  </a>
-                </Item>
-              ))}
-            </Box>
-          </ThemeProvider>
+      <Typography variant="h4" gutterBottom>Equipo Henry College</Typography>
+      <Box sx={{ mt: 6 }}>
+        <Grid container spacing={2} >
+          {[lightTheme].map((theme, index) => (
+            <Grid item xs={30} key={index}>
+              <ThemeProvider theme={theme}>
+                <Box
+                  sx={{
+                    bgcolor: 'background.default',
+                    display: 'grid',
+                    gridTemplateColumns: { md: '1fr 1fr 1fr 1fr' },
+                    gap: 6,
+                    height: 350
+                  }}
+                >
+                  {avatar.map((elevation) => (
+                    <Item key={elevation} elevation={elevation} sx={{width : 200}}>
+                      <Avatar src={elevation.imageUrl} sx={{ width: 150, height: 150 }} />
+                      <Typography>{elevation.name}</Typography>
+                      <a href={elevation.link}target="_blank" rel="noopener noreferrer">
+                        <Typography sx={{ color: "blue" }} >Linkedin</Typography>
+                      </a>
+                    </Item>
+                  ))}
+                </Box>
+              </ThemeProvider>
+            </Grid>
+          ))}
         </Grid>
-      ))}
-    </Grid>
+      </Box>
     </>
   );
 }
