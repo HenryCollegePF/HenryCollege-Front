@@ -11,6 +11,8 @@ import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import { logout } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
 import { removeSubscription } from "../../redux/store/slices/payment/paymentSlice";
+import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
+import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
 
 const settings = ["Profile", "Logout"];
 
@@ -21,6 +23,9 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const logoSrc =
+    theme.palette.mode === "light" ? lightModeLogo : darkModeLogo;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -50,7 +55,7 @@ const NavBar = () => {
           <Link to="/henrycollege">
             <img
               style={{ width: "45px" }}
-              src="https://assets.soyhenry.com/logos/ISOLOGO_HENRY_BLACK.png"
+              src={logoSrc}
               alt="logo"
             />
           </Link>

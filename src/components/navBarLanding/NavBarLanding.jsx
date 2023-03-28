@@ -4,14 +4,26 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "@mui/material";
+import darkModeLogo from "../../assets/images/henryBlanco.png";
+import lightModeLogo from "../../assets/images/Henry-logo.png";
 
 const NavBarLanding = () => {
+
+  const theme = useTheme();
+  const logoSrc =
+    theme.palette.mode === "light" ? lightModeLogo : darkModeLogo;
+
   return (
-    <AppBar position="fixed" color="secondary" sx={{ textDecoration: "none", "& a": { textDecoration: "none" } }}>
+    <AppBar
+      position="fixed"
+      color="secondary"
+      sx={{ textDecoration: "none", "& a": { textDecoration: "none" } }}
+    >
       <Toolbar sx={{ ml: { xs: 2, sm: 6 } }}>
         <img
           style={{ width: "120px" }}
-          src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo.png"
+          src={logoSrc}
           alt="logo"
         />
         <Typography variant="h6" sx={{ marginLeft: { xs: "10px", sm: "3%" } }}>
