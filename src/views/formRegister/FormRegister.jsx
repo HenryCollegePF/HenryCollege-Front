@@ -12,6 +12,8 @@ import {
 import * as React from "react";
 import { postNewUser } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
+import { VisibilityOff } from "@mui/icons-material";
+import { Visibility } from "@mui/icons-material";
 
 const FormRegister = () => {
   const dispatch = useDispatch();
@@ -23,11 +25,17 @@ const FormRegister = () => {
     phone: "",
     password: "",
   });
-  const [confirmPas, setConfirmPas] = React.useState("");
+  const [confirmPas, setConfirmPas] = React.useState({
+    password : ''
+  });
 
   const onConfirmPass = (event) => {
     event.preventDefault();
-    setConfirmPas(event.target.value);
+    const { name, value } = event.target;
+    setConfirmPas({
+      ...confirmPas,
+      [name]: value,
+    });
   };
   const onChange = (event) => {
     event.preventDefault();
@@ -39,10 +47,22 @@ const FormRegister = () => {
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    input.password !== confirmPas
+    input.password !== confirmPas.password
       ? alert("La contraseña no coincide")
       : dispatch(postNewUser(input));
   };
+  // *******Esto es de MUI para hacer visible la contraseña ***************
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };// ********************************************************************
+  const [showPasswordTwo, setShowPasswordTwo] = React.useState(false);
+  const handleClickShowPasswordTwo = () => setShowPasswordTwo((show) => !show);
+  const handleMouseDownPasswordTwo = (event) => {
+    event.preventDefault();
+  };// ********************************************************************
+  
 
     return (
       <Box
@@ -95,7 +115,7 @@ const FormRegister = () => {
           />
         </Box>
         <Box>
-        <TextField
+        {/* <TextField
           sx={{ m: 2, width: 300 }}
           id="filled-password-input"
           label="Contraseña"
@@ -117,7 +137,61 @@ const FormRegister = () => {
           onChange={onConfirmPass}
           helperText="Campo obligatorio"
           color="tertiary"
+        /> */}
+        <FormControl sx={{ m: 2, width: 300 }} color="tertiary" >
+        <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPassword ? "text" : "password"}
+          name="password"
+          value={input.password}
+          onChange={onChange}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Contraseña"
         />
+        <FormHelperText id="component-helper-text">
+          Campo obligatorio
+        </FormHelperText>
+      </FormControl>
+
+      <FormControl sx={{ m: 2, width: 300 }} color="tertiary">
+        <InputLabel 
+          htmlFor="outlined-adornment-password">Repite la contraseña</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPasswordTwo ? "text" : "password"}
+          name="password"
+          value={confirmPas.password}
+          onChange={onConfirmPass}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPasswordTwo}
+                onMouseDown={handleMouseDownPasswordTwo}
+                edge="end"
+              >
+                {showPasswordTwo ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Repite la contraseña"
+        />
+        <FormHelperText id="component-helper-text">
+          Campo obligatorio
+        </FormHelperText>
+      </FormControl>
         </Box>
 
         <Button
