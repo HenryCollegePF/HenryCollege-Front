@@ -1,21 +1,17 @@
-import {
-  Grid,
-  TextField,
-  Box,
-  Card,
-  CardContent,
-  Button,
-} from "@mui/material";
+import { Grid, TextField, Box, Card, CardContent, Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import styles from "./Form.module.css";
 import React, { useEffect, useState } from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
+import { VisibilityOff } from "@mui/icons-material";
+import { Visibility } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -31,9 +27,18 @@ function Form() {
     }));
   };
   const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(loginUser(formData))
+    e.preventDefault();
+    dispatch(loginUser(formData));
+    navigate("/henrycollege/courses")
   };
+
+  // *******Esto es de MUI para hacer visible la contraseña ***************
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };// ********************************************************************
+  
 
   return (
     <div className={styles.container}>
@@ -56,20 +61,33 @@ function Form() {
                     color="tertiary"
                   />
                 </Grid>
-
-                <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
+                <FormControl sx={{ m: 1, width:  300 }} color="tertiary"variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Contraseña
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
-                    sx={{ width: 300, mt:'1rem' }}
-                    color="tertiary"
                     value={formData.password}
                     onChange={handleOnChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Contraseña"
                   />
+                </FormControl>
 
-                <Box sx={{ "& > button": { m: 1 ,mt:'1rem'} }}>
+                <Box sx={{ "& > button": { m: 1, mt: "1rem" } }}>
                   <LoadingButton
                     variant="contained"
                     type="submit"
