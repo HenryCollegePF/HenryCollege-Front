@@ -7,24 +7,24 @@ import { Link } from "react-router-dom";
 
 const NavBarLanding = () => {
   return (
-    <AppBar position="fixed" sx={{ bgcolor: "#fafafa" }}>
-      <Toolbar sx={{ ml: 6 }}>
+    <AppBar position="fixed" color="secondary" sx={{ textDecoration: "none", "& a": { textDecoration: "none" } }}>
+      <Toolbar sx={{ ml: { xs: 2, sm: 6 } }}>
         <img
           style={{ width: "120px" }}
           src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo.png"
           alt="logo"
         />
-        <Typography variant="h6" sx={{ marginLeft: "3%" }}>
+        <Typography variant="h6" sx={{ marginLeft: { xs: "10px", sm: "3%" } }}>
           <Link to={"/henrycollege"}>
             <Button
               sx={{
                 mr: 2,
-                bgcolor: "#212121",
+                bgcolor: "primary.main", // use primary color for background
                 "&:hover": {
-                  bgcolor: "#F0F0F0",
-                  color: "#000000",
+                  bgcolor: "tertiary.main",
+                  color: "tertiary.contrastText", // use tertiary contrast color on hover
                 },
-                color: "#fffde7",
+                color: "primary.contrastText", // use primary contrast color for text
               }}
               color="primary"
             >

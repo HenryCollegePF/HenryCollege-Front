@@ -3,20 +3,22 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip from "@mui/material/Tooltip";
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import { logout } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
 import { removeSubscription } from "../../redux/store/slices/payment/paymentSlice";
 
-const settings = ['Profile','Logout'];
+const settings = ["Profile", "Logout"];
 
 const NavBar = () => {
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const theme = useTheme();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,15 +37,14 @@ const NavBar = () => {
     setAnchorElUser(null);
   };
 
-  const handlerLogout = () =>{
-    dispatch(removeSubscription())
-    dispatch(logout())
-    navigate('/henrycollege')
-  }
+  const handlerLogout = () => {
+    dispatch(removeSubscription());
+    dispatch(logout());
+    navigate("/henrycollege");
+  };
 
   return (
-
-    <AppBar position="fixed" color="secondary">
+    <AppBar position="fixed" color="secondary" sx={{ textDecoration: "none", "& a": { textDecoration: "none" } }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box display="flex" alignItems="center">
           <Link to="/henrycollege">
@@ -54,7 +55,7 @@ const NavBar = () => {
             />
           </Link>
           <Link to="/henrycollege">
-            <Typography color="black" variant="h6" sx={{ flexGrow: 1 }}>
+            <Typography color={theme.palette.mode === "dark" ? "white" : "black"} variant="h6" sx={{ flexGrow: 1 }}>
               | College
             </Typography>
           </Link>
@@ -62,7 +63,15 @@ const NavBar = () => {
         <Box display="flex" alignItems="center">
           <Link to={"/"} color="inherit">
             <Button
-              sx={{ mr: 2, color: "black", bgcolor: "#f5f5f5" }}
+              sx={{
+                textDecoration: "none",
+                mr: 1,
+                color: "black",
+                bgcolor: "#f5f5f5",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
+              }}
               color="inherit"
             >
               Henry
@@ -71,7 +80,14 @@ const NavBar = () => {
 
           <Link to={"/henrycollege/courses"} color="inherit">
             <Button
-              sx={{ mr: 2, color: "black", bgcolor: "#f5f5f5" }}
+              sx={{
+                mr: 1,
+                color: "black",
+                bgcolor: "#f5f5f5",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
+              }}
               color="inherit"
             >
               Cursos
@@ -80,7 +96,14 @@ const NavBar = () => {
 
           <Link to={"/henrycollege/nosotros"} color="inherit">
             <Button
-              sx={{ mr: 2, color: "black", bgcolor: "#f5f5f5" }}
+              sx={{
+                mr: 1,
+                color: "black",
+                bgcolor: "#f5f5f5",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
+              }}
               color="inherit"
             >
               Nosotros
@@ -90,13 +113,16 @@ const NavBar = () => {
           <Link to={"/henrycollege/registrarse"}>
             <Button
               sx={{
-                mr: 2,
+                mr: 1,
                 bgcolor: "#ffff00",
                 "&:hover": {
                   bgcolor: "#F0F0F0",
                   color: "#000000",
                 },
                 color: "#212121",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
               }}
               variant="contained"
             >
@@ -107,13 +133,16 @@ const NavBar = () => {
           <Link to={"/henrycollege/iniciarsesion"}>
             <Button
               sx={{
-                mr: 2,
+                mr: 1,
                 bgcolor: "#212121",
                 "&:hover": {
                   bgcolor: "#F0F0F0",
                   color: "#000000",
                 },
                 color: "#fffde7",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
               }}
               variant="contained"
             >
@@ -122,34 +151,39 @@ const NavBar = () => {
           </Link>
         </Box>
         <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" onClick={handlerLogout}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar
+                alt="Remy Sharp"
+                // src="/static/images/avatar/2.jpg"
+              />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" onClick={handlerLogout}>
+                  {setting}
+                </Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
       </Toolbar>
     </AppBar>
   );

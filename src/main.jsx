@@ -8,8 +8,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore";
-import { Switch } from '@mui/material';
-
+import { Switch, Paper } from "@mui/material";
 
 const lightTheme = createTheme({
   palette: {
@@ -48,11 +47,11 @@ const darkTheme = createTheme({
     background: {
       paper: "#000000",
     },
-    mode: 'dark',
+    mode: "dark",
   },
 });
 
-const persistor = persistStore(store)
+const persistor = persistStore(store);
 
 const AppWrapper = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -61,7 +60,7 @@ const AppWrapper = () => {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-  }
+  };
 
   return (
     <PersistGate persistor={persistor}>
@@ -69,7 +68,9 @@ const AppWrapper = () => {
         <BrowserRouter>
           <ThemeProvider theme={theme}>
             <Switch onChange={toggleDarkMode} checked={isDarkMode} />
-            <App />
+            <Paper sx={{ height: "100vh" }}>
+              <App sx={{ height: "100vh" }}/>
+            </Paper>
           </ThemeProvider>
         </BrowserRouter>
       </Provider>
@@ -77,9 +78,4 @@ const AppWrapper = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <AppWrapper />
-);
-
-
-
+ReactDOM.createRoot(document.getElementById("root")).render(<AppWrapper />);

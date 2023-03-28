@@ -57,8 +57,8 @@ const ProductDisplay = () => {
 
   return (
     <PayPalScriptProvider options={initialOptions}>
-      <h1>Membresia trimestral</h1>
-      <p>
+      <h1 color="tertiary">Membresia trimestral</h1>
+      <p color="tertiary">
         Paga ya solo <b>$100.00</b>
       </p>
       <PayPalButtons

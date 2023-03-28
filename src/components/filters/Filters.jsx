@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { InputLabel, Select } from "@material-ui/core";
-import Style from "./../filters/Filter.module.css";
-import { FormControl, Button, MenuItem, Box } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  useTheme,
+  Paper,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   getAllCourses,
   filtersByAlpha,
@@ -13,6 +19,7 @@ import {
 
 const Filters = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const [selectGetAll, setSelectGetAll] = useState("");
   const [SelectFilterAlpha, setSelectFilterAlpha] = useState("");
   const [SelectFilterLevel, setSelectFilterLevel] = useState("");
@@ -57,48 +64,59 @@ const Filters = () => {
 
   return (
     <Box
-      spacing={2}
-      display="inline-flex"
-      flexDirection="row"
+      display="flex"
       justifycontent="space-around"
       alignItems="center"
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignitems: "center",
-        mt: "3rem",
+        flexDirection: "column",
+        mt: 1,
+        "@media (min-width: 768px)": {
+          flexDirection: "row",
+          mt: 2,
+        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.background.paper,
       }}
-      color="tertiary"
     >
       <Box>
-        <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
-          <InputLabel id="demo-select-small">Ver cursos</InputLabel>
+        <FormControl sx={{ m: "2px", mt: 1, minWidth: 180 }} size="small">
+          <InputLabel id="demo-select-small" sx={{ color: theme.palette.text.primary }}>
+            Ver cursos
+          </InputLabel>
           <Select
             onChange={filterGetAll}
             labelId="demo-select-small"
             id="fdemo-select-small"
             autoWidth
-            label="filterType"
+            label="ver cursos"
             value={selectGetAll}
+            sx={{ color: theme.palette.text.primary }}
+            variant="outlined"
           >
             <MenuItem value="">
               <em>Ninguno</em>
             </MenuItem>
-            <MenuItem value="all">Todos</MenuItem>
+            <MenuItem value="all" onClick={clearAllFilters}>
+              Todos
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>
 
       <Box>
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
-          <InputLabel id="filterAlpha">Alfabeticamente</InputLabel>
+        <FormControl sx={{ m: "2px", mt: 1, minWidth: 180 }} size="small">
+          <InputLabel id="demo-select-small" sx={{ color: theme.palette.text.primary }}>
+            Alfabéticamente
+          </InputLabel>
           <Select
             onChange={filterAlpha}
-            labelId="filterAlpha"
-            id="filterAlpha"
+            labelId="demo-select-small"
+            id="demo-select-small"
             autoWidth
-            label="filterAlpha"
+            label="Alfabeticamente"
             value={SelectFilterAlpha}
+            sx={{ color: theme.palette.text.primary }}
+            variant="outlined"
           >
             <MenuItem value="">
               <em>Ninguno</em>
@@ -110,20 +128,24 @@ const Filters = () => {
       </Box>
 
       <Box>
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
-          <InputLabel id="tercer-select-label">Nivel</InputLabel>
+        <FormControl sx={{ m: "2px", mt: 1, minWidth: 180 }} size="small">
+          <InputLabel id="demo-select-small" sx={{ color: theme.palette.text.primary }}>
+            Nivel
+          </InputLabel>
           <Select
             onChange={filterLevel}
-            labelId="tercer-select-label"
-            id="tercer-select-label"
+            labelId="demo-select-small"
+            id="demo-select-small"
             autoWidth
-            label="tercer-select-label"
+            label="Nivel"
             value={SelectFilterLevel}
+            sx={{ color: theme.palette.text.primary }}
+            variant="outlined"
           >
             <MenuItem value="">
               <em>Ninguno</em>
             </MenuItem>
-            <MenuItem value="Basico">Basico</MenuItem>
+            <MenuItem value="Basico">Básico</MenuItem>
             <MenuItem value="intermedio">intermedio </MenuItem>
             <MenuItem value="alto">alto</MenuItem>
           </Select>
@@ -131,21 +153,19 @@ const Filters = () => {
       </Box>
 
       <Box>
-        <FormControl
-          sx={{ m: 1, minWidth: 150 }}
-          label="Duración"
-          type="text"
-          variant="outlined"
-          color="tertiary"
-        >
-          <InputLabel id="cuarto-select-label">Duración</InputLabel>
+        <FormControl sx={{ m: "2px", mt: 1, minWidth: 180 }} size="small">
+          <InputLabel id="demo-select-small" sx={{ color: theme.palette.text.primary }}>
+            Duración
+          </InputLabel>
           <Select
             onChange={filterMaxMin}
-            labelId="cuarto-select-label"
-            id="cuarto-select-label"
+            labelId="demo-select-small"
+            id="demo-select-small"
             autoWidth
-            label="cuarto-select-label"
+            label="Duración"
             value={SelectFilterMaxMin}
+            sx={{ color: theme.palette.text.primary }}
+            variant="outlined"
           >
             <MenuItem value="">
               <em>Ninguno</em>
@@ -154,21 +174,22 @@ const Filters = () => {
             <MenuItem value="max">max</MenuItem>
           </Select>
         </FormControl>
+      </Box>
 
+      <Box>
         <Button
           sx={{
-            mr: 2,
-            mt: 2,
-            bgcolor: "#212121",
+            m: "2px",
+            mt: 1,
+            minWidth: 180,
+            height: 40,
+            bgcolor: theme.palette.primary.dark,
             "&:hover": {
-              bgcolor: "#F0F0F0",
-              color: "#000000",
+              bgcolor: theme.palette.primary.light,
+              color: theme.palette.text.primary,
             },
-            color: "#fffde7",
-            height: "40px",
-            width: "150px",
+            color: theme.palette.common.white,
           }}
-          color="primary"
           onClick={clearAllFilters}
         >
           Borrar filtros
