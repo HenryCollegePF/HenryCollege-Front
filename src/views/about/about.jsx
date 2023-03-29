@@ -80,7 +80,7 @@ const Item = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(2),
   position: 'relative',
   paddingTop: '120px',
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.mode === 'dark' ? '#424242' : '#fff',
   '& > *:first-child': {
     position: 'absolute',
     top: '-40px',
@@ -97,6 +97,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
+
 const darkTheme = createTheme({ palette: { mode: 'dark' } });
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
@@ -106,7 +107,7 @@ export default function Elevation() {
       <Typography variant="h4" gutterBottom>Equipo Henry College</Typography>
       <Box sx={{ mt: 6 }}>
         <Grid container spacing={2} >
-          {[lightTheme? lightTheme:darkTheme].map((theme, index) => (
+          {[lightTheme].map((theme, index) => (
             <Grid item xs={30} key={index}>
               <ThemeProvider theme={theme}>
                 <Box
