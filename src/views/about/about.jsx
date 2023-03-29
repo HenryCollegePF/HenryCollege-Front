@@ -52,24 +52,7 @@ const avatar = [
         link: "https://www.linkedin.com/in/jerson-gonz%C3%A1lez-estrada-884399250/",
         imageUrl: imageGrupo7},
 ]
-// const Item = styled(Paper)(({ theme }) => ({
-//   //...
-//   display: 'flex',
-//   flexDirection: 'column',
-//   alignItems: 'center',
-//   textAlign: 'center',
-//   maxWidth: 300,
-//   margin: 'auto',
-//   marginTop: theme.spacing(2),
-//   position: 'relative', // para establecer un contexto de posicionamiento relativo para los elementos internos
-//   paddingTop: '120px', // para dejar espacio para la imagen en la parte superior
-//   '& > *:first-child': {
-//     position: 'absolute',
-//     top: '-40px',
-//     left: '50%',
-//     transform: 'translateX(-50%)',
-//   },
-// }));
+
 const Item = styled(Paper)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
