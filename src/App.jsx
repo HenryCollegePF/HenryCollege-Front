@@ -1,15 +1,8 @@
 import { Route, Routes, useLocation } from "react-router-dom"
+import './App.css'
 import NavBar from './components/navBar/NavBar'
 import { About, Detail, Form, Home, Landing, SubLanding, FormRegister, Payment } from './views'
 import React from "react"
-import { styled } from "@mui/material"
-
-const Root = styled('div')({
-  maxWidth: "1280px",
-  margin: "0 auto",
-  padding: "2rem",
-  textAlign: "center",
-});
 
 function App() {
 
@@ -17,7 +10,7 @@ function App() {
 
   return (
 
-      <Root>
+      <div className="App">
         {location.pathname !== "/" && <NavBar />}
         
         <Routes>
@@ -31,7 +24,7 @@ function App() {
           <Route exact path="/henrycollege/payment" element={<Payment/>} />          
         </Routes>
         
-      </Root>
+      </div>
   )
 }
 

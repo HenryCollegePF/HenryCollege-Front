@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Provider } from "react-redux";
@@ -8,7 +9,6 @@ import store from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore";
 import { Switch, Paper } from "@mui/material";
-import { auth } from "./firebase.js";
 
 const lightTheme = createTheme({
   palette: {
@@ -69,7 +69,7 @@ const AppWrapper = () => {
           <ThemeProvider theme={theme}>
             <Switch onChange={toggleDarkMode} checked={isDarkMode} />
             <Paper sx={{ height: "100vh" }}>
-              <App sx={{ height: "100vh" }} />
+              <App sx={{ height: "100vh" }}/>
             </Paper>
           </ThemeProvider>
         </BrowserRouter>
@@ -78,20 +78,4 @@ const AppWrapper = () => {
   );
 };
 
-const FirebaseApp = ({ children }) => {
-  const [isFirebaseReady, setIsFirebaseReady] = useState(false);
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setIsFirebaseReady(true);
-    });
-  }, []);
-
-  return isFirebaseReady ? children : null;
-};
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <FirebaseApp>
-    <AppWrapper />
-  </FirebaseApp>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<AppWrapper />);
