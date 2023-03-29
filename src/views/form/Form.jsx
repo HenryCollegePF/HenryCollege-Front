@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { VisibilityOff } from "@mui/icons-material";
 import { Visibility } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import Login from "../../components/logIn/LogIn";
 
 function Form() {
   const dispatch = useDispatch();
@@ -131,6 +132,11 @@ function Form() {
                     </Button>
                   </Link>
                 </Box>
+
+                <Box sx={{ "& > button": { m: 1, mt: "1rem" } }}>
+                  <Login/>
+                </Box>
+                
               </CardContent>
             </Card>
           </Grid>
