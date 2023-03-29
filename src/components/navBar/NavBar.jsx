@@ -13,19 +13,19 @@ import { useDispatch } from "react-redux";
 import { removeSubscription } from "../../redux/store/slices/payment/paymentSlice";
 import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const settings = ["Profile", "Logout"];
 
 const NavBar = () => {
-
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const logoSrc =
-    theme.palette.mode === "light" ? lightModeLogo : darkModeLogo;
+  const logoSrc = theme.palette.mode === "light" ? lightModeLogo : darkModeLogo;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,25 +42,34 @@ const NavBar = () => {
     setAnchorElUser(null);
   };
 
+  const logoutfirebase = () => {
+    signOut(auth);
+  };
+
   const handlerLogout = () => {
     dispatch(removeSubscription());
     dispatch(logout());
+    dispatch(logoutfirebase());
     navigate("/henrycollege");
   };
 
   return (
-    <AppBar position="fixed" color="secondary" sx={{ textDecoration: "none", "& a": { textDecoration: "none" } }}>
+    <AppBar
+      position="fixed"
+      color="secondary"
+      sx={{ textDecoration: "none", "& a": { textDecoration: "none" } }}
+    >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box display="flex" alignItems="center">
           <Link to="/henrycollege">
-            <img
-              style={{ width: "45px" }}
-              src={logoSrc}
-              alt="logo"
-            />
+            <img style={{ width: "45px" }} src={logoSrc} alt="logo" />
           </Link>
           <Link to="/henrycollege">
-            <Typography color={theme.palette.mode === "dark" ? "white" : "black"} variant="h6" sx={{ flexGrow: 1 }}>
+            <Typography
+              color={theme.palette.mode === "dark" ? "white" : "black"}
+              variant="h6"
+              sx={{ flexGrow: 1 }}
+            >
               | College
             </Typography>
           </Link>

@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.h {
+    text-align: left;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 47vw;
+    max-width: 640px;
+    color: black
+}
