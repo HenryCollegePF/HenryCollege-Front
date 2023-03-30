@@ -37,12 +37,20 @@ const Footer = () => {
                 <Stack spacing={2}>
                   <Box>
                     <img
-                      style={{ width: "100%", maxWidth: "200px", height: "auto" }}
+                      style={{
+                        width: "100%",
+                        maxWidth: "200px",
+                        height: "auto",
+                      }}
                       src={imageLogo}
                       alt="logo"
                     />
                   </Box>
-                  <Typography variant="caption" component="a" color="secondary">
+                  <Typography
+                    variant="caption"
+                    component="span"
+                    color="secondary"
+                  >
                     Consultas a admisiones@soyhenry.com
                   </Typography>
                 </Stack>
@@ -51,39 +59,32 @@ const Footer = () => {
               <Grid item xs={6} md={3}>
                 <Stack spacing={2}>
                   <Typography color="primary">Estudia en Henry</Typography>
-                  <Typography
-                    variant="caption"
-                    component="a"
-                    href="#"
-                    color="secondary"
-                    onClick={() => {
-                      window.location.href = "/henrycollege/courses";
-                    }}
-                  >
-                    Cursos
-                  </Typography>
+
+                  <Link to="/henrycollege/courses">
+                    <Typography
+                      variant="caption"
+                      component="span"
+                      color="secondary"
+                    >
+                      Cursos
+                    </Typography>
+                  </Link>
+
+                  <Link to="/henrycollege/payment">
+                    <Typography
+                      variant="caption"
+                      component="span"
+                      color="secondary"
+                    >
+                      Membresia
+                    </Typography>
+                  </Link>
 
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href = "/henrycollege/payment";
-                    }}
-                  >
-                    Membresia
-                  </Typography>
-
-                  <Typography
-                    variant="caption"
-                    component="a"
-                    href="#"
-                    color="secondary"
-                    onClick={() => {
-                      window.location.href =
-                        "https://www.soyhenry.com/webfullstack";
-                    }}
+                    href="https://www.soyhenry.com/webfullstack"
                   >
                     Carrera Desarrollo Full Stack
                   </Typography>
@@ -91,12 +92,8 @@ const Footer = () => {
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href =
-                        "https://www.soyhenry.com/carrera-data-science";
-                    }}
+                    href="https://www.soyhenry.com/carrera-data-science"
                   >
                     Carrera Data Science
                   </Typography>
@@ -104,12 +101,8 @@ const Footer = () => {
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href =
-                        "https://www.soyhenry.com/curso-javascript";
-                    }}
+                    href="https://www.soyhenry.com/curso-javascript"
                   >
                     Curso JavaScript
                   </Typography>
@@ -122,11 +115,8 @@ const Footer = () => {
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href = "/henrycollege/nosotros";
-                    }}
+                    href="/henrycollege/nosotros"
                   >
                     Nosotros
                   </Typography>
@@ -134,54 +124,36 @@ const Footer = () => {
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href = "https://www.soyhenry.com/prensa";
-                    }}
+                    href="https://www.soyhenry.com/prensa"
                   >
                     Prensa
                   </Typography>
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href = "https://blog.soyhenry.com/";
-                    }}
+                    href="https://blog.soyhenry.com/"
                   >
                     Blog
                   </Typography>
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href = "https://www.soyhenry.com/eventos";
-                    }}
+                    href="https://www.soyhenry.com/eventos"
                   >
                     Eventos
                   </Typography>
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href =
-                        "https://www.soyhenry.com/muro-del-amor";
-                    }}
+                    href="https://www.soyhenry.com/muro-del-amor"
                   >
                     Muro del Amor
                   </Typography>
-                  <Typography
-                    variant="caption"
-                    component="a"
-                    href="#"
-                    color="secondary"
-                  >
+                  <Typography variant="caption" component="a" color="secondary">
                     Trabaja en Henry
                   </Typography>
                 </Stack>
@@ -192,23 +164,16 @@ const Footer = () => {
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href = "https://www.soyhenry.com/hiring";
-                    }}
+                    href="https://www.soyhenry.com/hiring"
                   >
                     Contrata talento
                   </Typography>
                   <Typography
                     variant="caption"
                     component="a"
-                    href="#"
                     color="secondary"
-                    onClick={() => {
-                      window.location.href =
-                        "https://www.talent.soyhenry.com/?hl=es";
-                    }}
+                    href="https://www.talent.soyhenry.com/?hl=es"
                   >
                     Explora candidatos
                   </Typography>
