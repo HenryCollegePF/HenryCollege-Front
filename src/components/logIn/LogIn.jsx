@@ -12,6 +12,7 @@ import {
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginUserFirebase } from "../../redux/store/slices/users/getAllUsers";
 // import axios from 'axios'
 
@@ -19,6 +20,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+
   const googleAuth = new GoogleAuthProvider();
   const facebookAuth = new FacebookAuthProvider();
   const githubAuth = new GithubAuthProvider();
@@ -35,6 +38,11 @@ const Login = () => {
           emailVerified: signUpData.user.emailVerified,
         };
         dispatch(loginUserFirebase(dataFirebase));
+        navigate("/henrycollege/courses");
+
+        // Display welcome message
+        const welcomeMessage = `Bienvenido/a ${signUpData.user.displayName}!`;
+        alert(welcomeMessage);
       }
     } catch (error) {
       console.log(error);
