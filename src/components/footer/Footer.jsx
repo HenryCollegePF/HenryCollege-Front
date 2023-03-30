@@ -112,14 +112,16 @@ const Footer = () => {
               <Grid item xs={6} md={3}>
                 <Stack spacing={2}>
                   <Typography color="primary">Sobre nosotros</Typography>
-                  <Typography
-                    variant="caption"
-                    component="a"
-                    color="secondary"
-                    href="/henrycollege/nosotros"
-                  >
-                    Nosotros
-                  </Typography>
+
+                  <Link to="/henrycollege/nosotros">
+                    <Typography
+                      variant="caption"
+                      component="span"
+                      color="secondary"
+                    >
+                      Nosotros
+                    </Typography>
+                  </Link>
 
                   <Typography
                     variant="caption"
