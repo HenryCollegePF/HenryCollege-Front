@@ -11,11 +11,14 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+import { loginUserFirebase } from "../../redux/store/slices/users/getAllUsers";
 // import axios from 'axios'
 
 const Login = () => {
+  const dispatch = useDispatch();
 
-  const [user, setUser] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const googleAuth = new GoogleAuthProvider();
   const facebookAuth = new FacebookAuthProvider();
   const githubAuth = new GithubAuthProvider();
@@ -25,15 +28,17 @@ const Login = () => {
     try {
       if (!user) {
         const signUpData = await signInWithPopup(auth, authType);
-        console.log(signUpData);
+        const dataFirebase = {
+          firstName: signUpData.user.displayName,
+          email: signUpData.user.email,
+          isExternal: true,
+          emailVerified: signUpData.user.emailVerified,
+        };
+        dispatch(loginUserFirebase(dataFirebase));
       }
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const logout = () => {
-    signOut(auth);
   };
 
   return (

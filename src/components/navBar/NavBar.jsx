@@ -1,3 +1,4 @@
+import { Switch } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -24,6 +25,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [darkMode, setDarkMode] = React.useState(false);
 
   const logoSrc = theme.palette.mode === "light" ? lightModeLogo : darkModeLogo;
 
@@ -49,7 +51,7 @@ const NavBar = () => {
   const handlerLogout = () => {
     dispatch(removeSubscription());
     dispatch(logout());
-    dispatch(logoutfirebase());
+    logoutfirebase();
     navigate("/henrycollege");
   };
 
@@ -198,6 +200,11 @@ const NavBar = () => {
             ))}
           </Menu>
         </Box>
+        <Switch
+          checked={darkMode}
+          onChange={() => setDarkMode(!darkMode)}
+          sx={{ ml: 2 }}
+        />
       </Toolbar>
     </AppBar>
   );
