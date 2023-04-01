@@ -14,8 +14,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   loginUser,
-  postNewUser,
-  postNewUserTerceros,
 } from "../../redux/store/slices/users/getAllUsers";
 import axios from "axios";
 // import axios from 'axios'
@@ -34,26 +32,11 @@ const Login = () => {
     try {
       if (!user) {
         const signUpData = await signInWithPopup(auth, authType);
-
-        const dataFirebase = {
-          firstName: signUpData.user.displayName,
-          lastName: signUpData.user.displayName,
+        const dataSign = {
           email: signUpData.user.email,
           password: signUpData.user.uid,
-          emailVerified: signUpData.user.emailVerified,
-          phone: signUpData.user.uid,
-        };
-
-        const dataTerceros = {
-          email: signUpData.user.email,
-          password: signUpData.user.uid,
-        };
-
-        dispatch(postNewUserTerceros(dataFirebase));
-
-        const { data } = await axios.post(`${URL}/students/login`, dataTerceros);
-        setAuthToken(data.auth.access_token);
-        dispatch(logUser(data));
+        }
+        dispatch(loginUser(dataSign));
 
         navigate("/henrycollege/courses");
 
