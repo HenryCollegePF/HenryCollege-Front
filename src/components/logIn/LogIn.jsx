@@ -1,10 +1,9 @@
 import React from "react";
+import { logUser } from "../../redux/store/slices/users";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import {
-  getAuth,
   signInWithPopup,
-  signOut,
   GoogleAuthProvider,
   FacebookAuthProvider,
   GithubAuthProvider,
@@ -12,29 +11,54 @@ import {
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
-import { loginUserFirebase } from "../../redux/store/slices/users/getAllUsers";
+import { useNavigate } from "react-router-dom";
+import {
+  loginUser,
+  postNewUser,
+  postNewUserTerceros,
+} from "../../redux/store/slices/users/getAllUsers";
+import axios from "axios";
 // import axios from 'axios'
 
 const Login = () => {
   const dispatch = useDispatch();
 
   const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+
   const googleAuth = new GoogleAuthProvider();
   const facebookAuth = new FacebookAuthProvider();
   const githubAuth = new GithubAuthProvider();
-  const auth1 = getAuth();
 
   const handlerLogin = async (authType) => {
     try {
       if (!user) {
         const signUpData = await signInWithPopup(auth, authType);
+
         const dataFirebase = {
           firstName: signUpData.user.displayName,
+          lastName: signUpData.user.displayName,
           email: signUpData.user.email,
-          isExternal: true,
+          password: signUpData.user.uid,
           emailVerified: signUpData.user.emailVerified,
+          phone: signUpData.user.uid,
         };
-        dispatch(loginUserFirebase(dataFirebase));
+
+        const dataTerceros = {
+          email: signUpData.user.email,
+          password: signUpData.user.uid,
+        };
+
+        dispatch(postNewUserTerceros(dataFirebase));
+
+        const { data } = await axios.post(`${URL}/students/login`, dataTerceros);
+        setAuthToken(data.auth.access_token);
+        dispatch(logUser(data));
+
+        navigate("/henrycollege/courses");
+
+        // Display welcome message
+        alert(`Bienvenido/a ${signUpData.user.displayName}!`);
       }
     } catch (error) {
       console.log(error);

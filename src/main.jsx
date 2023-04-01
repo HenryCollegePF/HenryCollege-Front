@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore";
 import { Switch, Paper } from "@mui/material";
 import { auth } from "./firebase.js";
+import NavBar from "./components/navBar/NavBar";
 
 const lightTheme = createTheme({
   palette: {
@@ -58,18 +59,19 @@ const AppWrapper = () => {
 
   const theme = isDarkMode ? darkTheme : lightTheme;
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const toggleDarkMode = useCallback(() => {
+    setIsDarkMode((prev) => !prev);
+  }, [setIsDarkMode]);
 
   return (
     <PersistGate persistor={persistor}>
       <Provider store={store}>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
-            <Switch onChange={toggleDarkMode} checked={isDarkMode} />
+            <NavBar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
             <Paper sx={{ height: "100vh" }}>
               <App sx={{ height: "100vh" }} />
+            <Switch onChange={toggleDarkMode} checked={isDarkMode} />
             </Paper>
           </ThemeProvider>
         </BrowserRouter>
