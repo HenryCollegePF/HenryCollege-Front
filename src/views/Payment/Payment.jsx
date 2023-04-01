@@ -1,28 +1,23 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Button,
-  Grid,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Hidden,
-} from "@mui/material";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postPayment } from "../../redux/store/slices/payment/paymentSlice";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
+import { postPayment } from "../../redux/store/slices/payment/paymentSlice";
 
 const ProductDisplay = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userState);
+  const userId = useSelector((state) => state.userState.loggedUser.student.id);
 	const navigate = useNavigate();
   const payment = useSelector((state) => state.paymentState);
+  
   const [values, setValues] = useState({
     lookup_key: "20.00",
   });
+
+  const [dataPay, setdataPay] = useState({
+    pricePaid: '',
+    paymentId: '',
+  })
 
   const initialOptions = {
     "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID, // Viene de Paypal
@@ -44,8 +39,12 @@ const ProductDisplay = () => {
 
   const handleOrderApproved = async (data, actions) => {
     const paymentDetails = await actions.order.capture();
-    const name = paymentDetails.payer.name.given_name;
-    dispatch(postPayment(paymentDetails)); // => Va a decirle al back quien hizo la compra y el id de esa compra
+    setdataPay({
+      pricePaid: paymentDetails.purchase_units[0].amount.value,
+      paymentId: paymentDetails.id,
+    })
+    dispatch(postPayment(dataPay,userId)); // => Va a decirle al back quien hizo la compra y el id de esa compra
+    console.log(dataPay)
 		navigate('/henrycollege/courses')
   };
 

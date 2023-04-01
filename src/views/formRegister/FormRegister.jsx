@@ -134,29 +134,6 @@ const FormRegister = () => {
         />
       </Box>
       <Box>
-        {/* <TextField
-          sx={{ m: 2, width: 300 }}
-          id="filled-password-input"
-          label="Contraseña"
-          type="password"
-          autoComplete="current-password"
-          name="password"
-          value={input.password}
-          onChange={onChange}
-          helperText="Campo obligatorio"
-          color="tertiary"
-        />
-        <TextField
-          sx={{ m: 2, width: 300 }}
-          id="filled-password-input"
-          label="Repite contraseña"
-          type="password"
-          autoComplete="current-password"
-          value={confirmPas}
-          onChange={onConfirmPass}
-          helperText="Campo obligatorio"
-          color="tertiary"
-        /> */}
         <FormControl sx={{ m: 2, width: 300 }} color="tertiary">
           <InputLabel htmlFor="outlined-adornment-password">
             Contraseña
