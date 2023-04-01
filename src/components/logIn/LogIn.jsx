@@ -1,7 +1,7 @@
 import React from "react";
 import { logUser } from "../../redux/store/slices/users";
 import { Button } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import {
   signInWithPopup,
   GoogleAuthProvider,
