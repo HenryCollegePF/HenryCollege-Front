@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setUserList, logoutUser, logUser } from ".";
+import { setUserList, logoutUser, logUser, getUserById } from ".";
 import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
 const URL = import.meta.env.VITE_BACK_URL || "http://localhost:3001";
@@ -31,6 +31,23 @@ export const postNewUser = (user) => {
       alert("Registro exitoso 🎉🎉🎉");
     } catch (error) {
       console.log("err_post_slice", error);
+    }
+  };
+};
+//Get users by ID
+
+export const getUsersById = (id) => {
+  return async (dispatch) => {
+    try {
+      const token = getAuthToken();
+      let res = await axios.get(`${URL}/membership/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(getUserById(res.data));
+    } catch (error) {
+      console.log(error);
     }
   };
 };

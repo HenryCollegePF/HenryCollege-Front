@@ -16,6 +16,7 @@ import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+// import Profile from "../../views/profile/Profile";
 
 const settings = ["Profile", "Logout"];
 
@@ -53,6 +54,11 @@ const NavBar = () => {
     dispatch(logout());
     logoutfirebase();
     navigate("/henrycollege");
+  };
+
+  const handlerProfile = () => {
+    
+    navigate("/profile");
   };
 
   return (
@@ -191,15 +197,20 @@ const NavBar = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" onClick={handlerLogout}>
-                  {setting}
+           <MenuItem key="Profile" onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" onClick={handlerProfile}>
+                Profile
                 </Typography>
               </MenuItem>
-            ))}
+
+              <MenuItem key="Logout" onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" onClick={handlerLogout}>
+                  Logout
+                </Typography>
+              </MenuItem>
           </Menu>
         </Box>
+        {/* <Profile/> */}
         <Switch
           checked={darkMode}
           onChange={() => setDarkMode(!darkMode)}
