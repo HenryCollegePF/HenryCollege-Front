@@ -16,10 +16,11 @@ import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import { useState } from "react";
 
 const settings = ["Profile", "Logout"];
 
-const NavBar = () => {
+const NavBar = ({ toggleDarkMode, isDarkMode }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -201,9 +202,11 @@ const NavBar = () => {
           </Menu>
         </Box>
         <Switch
-          checked={darkMode}
-          onChange={() => setDarkMode(!darkMode)}
+          checked={isDarkMode}
+          onChange={() => toggleDarkMode(!isDarkMode)}
+          inputProps={{ "aria-label": "toggle dark mode" }}
           sx={{ ml: 2 }}
+          color="primary"
         />
       </Toolbar>
     </AppBar>
