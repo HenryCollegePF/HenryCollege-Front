@@ -39,7 +39,6 @@ export const loginUser = (user) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${URL}/students/login`, user);
-      const terceros = await postNewUserTerceros;
       setAuthToken(data.auth.access_token);
       dispatch(logUser(data));
     } catch (error) {
@@ -48,18 +47,6 @@ export const loginUser = (user) => {
     }
   };
 };
-
-export const postNewUserTerceros = (user) => {
-  return async (dispatch) => {
-    try {
-      await axios.post(`${URL}/students`, user);
-      alert("Registro exitoso 🎉🎉🎉");
-    } catch (error) {
-      console.log("err_post_slice", error);
-    }
-  };
-};
-
 
 //{firstName, email, isExternal}
 // const {firstName, email, isExternal} = user

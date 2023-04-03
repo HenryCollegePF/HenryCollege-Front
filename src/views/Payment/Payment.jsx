@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Button,
-  Grid,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Hidden,
-} from "@mui/material";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postPayment } from "../../redux/store/slices/payment/paymentSlice";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
+import { postPayment } from "../../redux/store/slices/payment/paymentSlice";
 
 const ProductDisplay = () => {
   const dispatch = useDispatch();
