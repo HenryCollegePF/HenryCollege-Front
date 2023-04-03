@@ -2,7 +2,7 @@ import axios from "axios";
 import { setUserList, logoutUser, logUser, getUserById } from ".";
 import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
-const URL = import.meta.env.VITE_BACK_URL || "http://localhost:3001";
+const URL = "http://localhost:3001";
 
 //Get users
 
@@ -36,18 +36,18 @@ export const postNewUser = (user) => {
 };
 //Get users by ID
 
-export const getUsersById = (id) => {
+export const getUsersById = (id,token) => {
   return async (dispatch) => {
     try {
-      const token = getAuthToken();
       let res = await axios.get(`${URL}/membership/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      });console.log(res);
       dispatch(getUserById(res.data));
+      
     } catch (error) {
-      console.log(error);
+      console.log(error, "error by id");
     }
   };
 };

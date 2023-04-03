@@ -57,7 +57,6 @@ const NavBar = () => {
   };
 
   const handlerProfile = () => {
-    
     navigate("/profile");
   };
 

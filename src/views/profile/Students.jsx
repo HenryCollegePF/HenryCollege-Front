@@ -10,13 +10,16 @@ import Typography from "@mui/material/Typography";
 
 
 function Students() {
-  const {id} = useParams()
+  
   const dispatch = useDispatch();
+  const {id} = useSelector((state) => state.userState.loggedUser.student)
+  console.log(id);
   const allUsers = useSelector((state) => state.userState.userById);
   console.log(allUsers);
-
+  const token = useSelector((state) => state.userState.loggedUser.auth.access_token)
+console.log(token);
   useEffect(() => {
-    dispatch(getUsersById(id)); 
+    dispatch(getUsersById(id,token)); 
   }, [dispatch, id]);
 
   return(
