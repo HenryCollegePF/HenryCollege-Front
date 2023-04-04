@@ -48,22 +48,6 @@ export const loginUser = (user) => {
   };
 };
 
-//{firstName, email, isExternal}
-// const {firstName, email, isExternal} = user
-export const loginUserFirebase = (user) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(`${URL}/students/login`, user);
-      setAuthToken(data.auth.access_token);
-      dispatch(logUser(data));
-    } catch (error) {
-      await axios.post(`${URL}/students`, user);
-      const { data } = await axios.post(`${URL}/students`, user);
-      console.log("err_login_slice", error);
-    }
-  };
-};
-
 export const logout = () => (dispatch) => {
   return dispatch(logoutUser());
 };

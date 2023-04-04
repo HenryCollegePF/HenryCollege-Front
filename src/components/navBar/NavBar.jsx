@@ -14,9 +14,6 @@ import { useDispatch } from "react-redux";
 import { removeSubscription } from "../../redux/store/slices/payment/paymentSlice";
 import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
-import { useState } from "react";
 
 const settings = ["Profile", "Logout"];
 
@@ -45,14 +42,9 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
     setAnchorElUser(null);
   };
 
-  const logoutfirebase = () => {
-    signOut(auth);
-  };
-
   const handlerLogout = () => {
     dispatch(removeSubscription());
     dispatch(logout());
-    logoutfirebase();
     navigate("/henrycollege");
   };
 
@@ -172,7 +164,7 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
                 alt="Remy Sharp"
-                // src="/static/images/avatar/2.jpg"
+              // src="/static/images/avatar/2.jpg"
               />
             </IconButton>
           </Tooltip>
