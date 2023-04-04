@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore";
 import { Switch, Paper } from "@mui/material";
 import NavBar from "./components/navBar/NavBar";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const lightTheme = createTheme({
   palette: {
@@ -53,6 +54,12 @@ const darkTheme = createTheme({
 
 const persistor = persistStore(store);
 
+const onRedirectCallback = (appState) => {
+  history.push(
+    appState && appState.returnTo ? appState.returnTo : window.location.pathname
+  );
+};
+
 const AppWrapper = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -69,8 +76,17 @@ const AppWrapper = () => {
           <ThemeProvider theme={theme}>
             <NavBar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
             <Paper sx={{ height: "100vh" }}>
-              <App sx={{ height: "100vh" }} />
-            <Switch onChange={toggleDarkMode} checked={isDarkMode} />
+              <Auth0Provider
+                domain={import.meta.env.VITE_AUTH0_DOMAIN}
+                clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+                onRedirectCallback={onRedirectCallback}
+                authorizationParams={{
+                  redirect_uri: window.location.origin
+                }}
+              >
+                <App sx={{ height: "100vh" }} />
+              </Auth0Provider>
+              <Switch onChange={toggleDarkMode} checked={isDarkMode} />
             </Paper>
           </ThemeProvider>
         </BrowserRouter>
@@ -80,7 +96,5 @@ const AppWrapper = () => {
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
-    <AppWrapper />
-  </>
+  <AppWrapper />
 );

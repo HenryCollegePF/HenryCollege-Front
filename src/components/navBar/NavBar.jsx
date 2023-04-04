@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { removeSubscription } from "../../redux/store/slices/payment/paymentSlice";
 import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const settings = ["Profile", "Logout"];
 
@@ -21,6 +22,7 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loginWithPopup, isAuthenticated, logout, isLoading } = useAuth0();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [darkMode, setDarkMode] = React.useState(false);
@@ -45,6 +47,7 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
   const handlerLogout = () => {
     dispatch(removeSubscription());
     dispatch(logout());
+    logout()
     navigate("/henrycollege");
   };
 
@@ -119,80 +122,87 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
             </Button>
           </Link>
 
-          <Link to={"/henrycollege/registrarse"}>
-            <Button
-              sx={{
-                mr: 1,
-                bgcolor: "#ffff00",
-                "&:hover": {
-                  bgcolor: "#F0F0F0",
-                  color: "#000000",
-                },
-                color: "#212121",
-                "@media (min-width:600px)": {
-                  mr: 2,
-                },
-              }}
-              variant="contained"
-            >
-              Crear Cuenta
-            </Button>
-          </Link>
+          {!isLoading && !isAuthenticated && (
+            <>
+              <Link to={"/henrycollege/registrarse"}>
+                <Button
+                  sx={{
+                    mr: 1,
+                    bgcolor: "#ffff00",
+                    "&:hover": {
+                      bgcolor: "#F0F0F0",
+                      color: "#000000",
+                    },
+                    color: "#212121",
+                    "@media (min-width:600px)": {
+                      mr: 2,
+                    },
+                  }}
+                  variant="contained"
+                >
+                  Crear Cuenta
+                </Button>
+              </Link>
+              <Button
+                sx={{
+                  mr: 1,
+                  bgcolor: "#212121",
+                  "&:hover": {
+                    bgcolor: "#F0F0F0",
+                    color: "#000000",
+                  },
+                  color: "#fffde7",
+                  "@media (min-width:600px)": {
+                    mr: 2,
+                  },
+                }}
+                variant="contained"
+                type="button"
+                onClick={() => loginWithPopup()}
+              >
+                Iniciar sesión
+              </Button>
+            </>
+          )}
 
-          <Link to={"/henrycollege/iniciarsesion"}>
-            <Button
-              sx={{
-                mr: 1,
-                bgcolor: "#212121",
-                "&:hover": {
-                  bgcolor: "#F0F0F0",
-                  color: "#000000",
-                },
-                color: "#fffde7",
-                "@media (min-width:600px)": {
-                  mr: 2,
-                },
+        </Box>
+
+        {isAuthenticated && (
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar
+                  alt="Remy Sharp"
+                // src="/static/images/avatar/2.jpg"
+                />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
               }}
-              variant="contained"
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
-              Iniciar sesión
-            </Button>
-          </Link>
-        </Box>
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar
-                alt="Remy Sharp"
-              // src="/static/images/avatar/2.jpg"
-              />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: "45px" }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" onClick={handlerLogout}>
-                  {setting}
-                </Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center" onClick={handlerLogout}>
+                    {setting}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        )}
         <Switch
           checked={isDarkMode}
           onChange={() => toggleDarkMode(!isDarkMode)}
