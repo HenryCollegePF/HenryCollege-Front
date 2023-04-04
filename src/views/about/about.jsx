@@ -17,7 +17,7 @@ import imageGrupo7 from "../../assets/images/jersito.jpg";
 const avatar = [
   {
     name: "Brenda Belen",
-    link: "https://www.linkedin.com/in/brenda-belen-8772aa211/",
+    link: "https://www.linkedin.com/in/brenda-de-los-angeles-belen-molina-8772aa211/",
     imageUrl: imageGrupo6,
   },
   {
