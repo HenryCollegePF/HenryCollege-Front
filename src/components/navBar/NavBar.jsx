@@ -5,13 +5,12 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import { logout } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
-import { removeSubscription } from "../../redux/store/slices/payment/paymentSlice";
 import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -44,12 +43,12 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
     setAnchorElUser(null);
   };
 
-  const handlerLogout = () => {
-    dispatch(removeSubscription());
+  const handlerLogout = async () => {
     dispatch(logout());
     logout()
     navigate("/henrycollege");
   };
+
 
   return (
     <AppBar
