@@ -8,7 +8,6 @@ import store from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore";
 import { Switch, Paper } from "@mui/material";
-import { auth } from "./firebase.js";
 import NavBar from "./components/navBar/NavBar";
 
 const lightTheme = createTheme({
@@ -80,20 +79,8 @@ const AppWrapper = () => {
   );
 };
 
-const FirebaseApp = ({ children }) => {
-  const [isFirebaseReady, setIsFirebaseReady] = useState(false);
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setIsFirebaseReady(true);
-    });
-  }, []);
-
-  return isFirebaseReady ? children : null;
-};
-
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <FirebaseApp>
+  <>
     <AppWrapper />
-  </FirebaseApp>
+  </>
 );

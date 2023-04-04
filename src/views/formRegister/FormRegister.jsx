@@ -1,5 +1,3 @@
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import { auth } from "../../firebase.js";
 import {
   TextField,
   Box,
@@ -49,7 +47,6 @@ const FormRegister = () => {
     });
   };
   
-  //se implementó en este onSubmit el firebase para la autenticación
   const onSubmit = async (event) => {
     event.preventDefault();
     if (input.password !== confirmPas.password) {
@@ -58,12 +55,6 @@ const FormRegister = () => {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        input.email,
-        input.password
-      );
-      const user = userCredential.user;
       dispatch(postNewUser(input));
     } catch (error) {
       console.error(error);
