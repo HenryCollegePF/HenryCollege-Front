@@ -21,14 +21,14 @@ export default function Detail() {
 
   return (
     <>
-      {detail.length && (
+      {detail && (
         <Card sx={{ display: "flex" }}>
           <Box sx={{ display: "flex", flexDirection: "column" }} color="tertiary">
             <Box sx={{ width: "100%", height: "100%" }} color="tertiary">
               <iframe
                 width="560"
                 height="400"
-                src={detail[0].videoSrc}
+                src={detail.videoSrc}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
@@ -39,7 +39,7 @@ export default function Detail() {
           <Box sx={{ display: "flex", flexDirection: "column" }} m="30px">
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography component="div" variant="h5" color="text.tertiary" >
-                {detail[0].name}
+                {detail.name}
               </Typography>
               {/* <Typography
               variant="subtitle1"
@@ -53,28 +53,28 @@ export default function Detail() {
 
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography component="div" variant="h6" color="text.tertiary">
-                Nivel : {detail[0].level}
+                Nivel : {detail.level}
               </Typography>
               <Typography
                 variant="subtitle1"
                 color="text.secondary"
                 component="div"
               >
-                Duración : {detail[0].duration}
+                Duración : {detail.duration}
               </Typography>
               <Typography
                 variant="subtitle1"
                 color="text.secondary"
                 component="div"
               >
-                Costo : {detail[0].price}
+                Costo : {detail.price}
               </Typography>
               <Typography
                 variant="subtitle1"
                 color="text.secondary"
                 component="div"
               >
-                Tema : {detail[0].tags}
+                Tema : {detail.tags}
               </Typography>
 
               <CustomizedRating />

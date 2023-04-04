@@ -1,8 +1,12 @@
 import { Route, Routes, useLocation } from "react-router-dom"
 import NavBar from './components/navBar/NavBar'
 import { About, Detail, Form, Home, Landing, SubLanding, FormRegister, Payment } from './views'
-import React from "react"
+import React, { useEffect } from "react"
 import { styled } from "@mui/material"
+import { useDispatch } from "react-redux"
+import { useAuth0 } from "@auth0/auth0-react"
+import { getUserDataByAuthId, setAuthToken } from "./utils/auth"
+import { logUser } from "./redux/store/slices/users"
 
 const Root = styled('div')({
   maxWidth: "1280px",
@@ -12,8 +16,27 @@ const Root = styled('div')({
 });
 
 function App() {
-
+  const dispatch = useDispatch();
   const location = useLocation();
+  const { user, getAccessTokenSilently } = useAuth0();
+  
+  useEffect(() => {
+    if (!user) return;
+
+    const getUserData = async () => {
+      const auth0Id = user.sub.split('|')[1];
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        }
+      });
+      const userData = await getUserDataByAuthId(auth0Id, token)
+      setAuthToken(token);
+      dispatch(logUser(userData))
+    }
+  
+    getUserData()
+  }, [user])
 
   return (
 
