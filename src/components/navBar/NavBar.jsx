@@ -22,7 +22,7 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loginWithPopup, isAuthenticated, logout, isLoading } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout, isLoading } = useAuth0();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [darkMode, setDarkMode] = React.useState(false);
@@ -158,7 +158,7 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
                 }}
                 variant="contained"
                 type="button"
-                onClick={() => loginWithPopup()}
+                onClick={() => loginWithRedirect()}
               >
                 Iniciar sesión
               </Button>
