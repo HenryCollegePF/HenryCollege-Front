@@ -2,6 +2,7 @@ import React from "react";
 import { logUser } from "../../redux/store/slices/users";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
+<<<<<<< HEAD
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -11,31 +12,37 @@ import {
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
+=======
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> 64f803d4cf43bc2e8d75aebaace773188685bb7e
 import { useNavigate } from "react-router-dom";
 import {
   loginUser,
 } from "../../redux/store/slices/users/getAllUsers";
-import axios from "axios";
-// import axios from 'axios'
 
 const Login = () => {
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.userState);
+  const user = userState.loggedUser;
 
-  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
-  const googleAuth = new GoogleAuthProvider();
-  const facebookAuth = new FacebookAuthProvider();
-  const githubAuth = new GithubAuthProvider();
+  const googleAuth = () => {};
+  const facebookAuth = () => {};
+  const githubAuth = () => {};
 
-  const handlerLogin = async (authType) => {
+  const handlerLogin = async () => {
     try {
       if (!user) {
+<<<<<<< HEAD
         const signUpData = await signInWithPopup(auth, authType);
         const dataSign = {
           email: signUpData.user.email,
           password: signUpData.user.uid,
         }
+=======
+        // Retrieve data from user useing auth0
+>>>>>>> 64f803d4cf43bc2e8d75aebaace773188685bb7e
         dispatch(loginUser(dataSign));
 
         navigate("/henrycollege/courses");

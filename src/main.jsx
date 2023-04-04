@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -8,8 +8,8 @@ import store from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore";
 import { Switch, Paper } from "@mui/material";
-import { auth } from "./firebase.js";
 import NavBar from "./components/navBar/NavBar";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const lightTheme = createTheme({
   palette: {
@@ -59,19 +59,36 @@ const AppWrapper = () => {
 
   const theme = isDarkMode ? darkTheme : lightTheme;
 
-  const toggleDarkMode = useCallback(() => {
+  const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
-  }, [setIsDarkMode]);
+  };
 
   return (
     <PersistGate persistor={persistor}>
       <Provider store={store}>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
-            <NavBar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
-            <Paper sx={{ height: "100vh" }}>
-              <App sx={{ height: "100vh" }} />
-            <Switch onChange={toggleDarkMode} checked={isDarkMode} />
+            <Paper
+              sx={{
+                height: "100vh",
+                backgroundColor: theme.palette.background.paper,
+              }}
+            >
+              <Auth0Provider
+                domain={import.meta.env.VITE_AUTH0_DOMAIN}
+                clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+                authorizationParams={{
+                  redirect_uri: `${window.location.origin}/henrycollege`,
+                }}
+                cacheLocation="localstorage"
+              >
+                <App
+                  sx={{ height: "100vh" }}
+                  toggleDarkMode={toggleDarkMode}
+                  isDarkMode={isDarkMode}
+                />
+              </Auth0Provider>
+              {/* <Switch onChange={toggleDarkMode} checked={isDarkMode} /> */}
             </Paper>
           </ThemeProvider>
         </BrowserRouter>
@@ -80,20 +97,4 @@ const AppWrapper = () => {
   );
 };
 
-const FirebaseApp = ({ children }) => {
-  const [isFirebaseReady, setIsFirebaseReady] = useState(false);
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setIsFirebaseReady(true);
-    });
-  }, []);
-
-  return isFirebaseReady ? children : null;
-};
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <FirebaseApp>
-    <AppWrapper />
-  </FirebaseApp>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<AppWrapper />);
