@@ -59,28 +59,36 @@ const AppWrapper = () => {
 
   const theme = isDarkMode ? darkTheme : lightTheme;
 
-  const toggleDarkMode = useCallback(() => {
+  const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
-  }, [setIsDarkMode]);
+  };
 
   return (
     <PersistGate persistor={persistor}>
       <Provider store={store}>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
-            <NavBar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
-            <Paper sx={{ height: "100vh" }}>
+            <Paper
+              sx={{
+                height: "100vh",
+                backgroundColor: theme.palette.background.paper,
+              }}
+            >
               <Auth0Provider
                 domain={import.meta.env.VITE_AUTH0_DOMAIN}
                 clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
                 authorizationParams={{
-                  redirect_uri: `${window.location.origin}/henrycollege`
+                  redirect_uri: `${window.location.origin}/henrycollege`,
                 }}
                 cacheLocation="localstorage"
               >
-                <App sx={{ height: "100vh" }} />
+                <App
+                  sx={{ height: "100vh" }}
+                  toggleDarkMode={toggleDarkMode}
+                  isDarkMode={isDarkMode}
+                />
               </Auth0Provider>
-              <Switch onChange={toggleDarkMode} checked={isDarkMode} />
+              {/* <Switch onChange={toggleDarkMode} checked={isDarkMode} /> */}
             </Paper>
           </ThemeProvider>
         </BrowserRouter>
@@ -89,6 +97,4 @@ const AppWrapper = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <AppWrapper />
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<AppWrapper />);
