@@ -30,17 +30,74 @@ function Profile(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  // const drawer = (
+  //   <div>
+  //     <Toolbar />
+  //     <Divider />
+  //     <List>
+  //       {['Datos Pago', 'Actualizar Cuenta'].map((text, index) => (
+  //         <ListItem key={text} disablePadding>
+  //           {text === 'Actualizar Cuenta' ? (
+  //             <Link to="/profile/formulario" style={{ textDecoration: 'none', color: 'inherit' }}>
+  //               <ListItemButton>
+  //                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+  //                 <ListItemText primary={text} />
+  //               </ListItemButton>
+  //             </Link>
+  //           ) : (
+  //             <Link to="/profile/students" style={{ textDecoration: 'none', color: 'inherit' }}>
+  //               <ListItemButton>
+  //                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+  //                 <ListItemText primary={text} />
+  //               </ListItemButton>
+  //             </Link>
+  //           )}
+  //         </ListItem>
+  //       ))}
+  //       <ListItem key="Informacion Personal" disablePadding>
+  //         <Link to="/profile/informacion-personal" style={{ textDecoration: 'none', color: 'inherit' }}>
+  //           <ListItemButton>
+  //             <ListItemIcon><InboxIcon /></ListItemIcon>
+  //             <ListItemText primary="Informacion Personal" />
+  //           </ListItemButton>
+  //         </Link>
+  //       </ListItem>
+  //       <ListItem
+  //         component={Link}
+  //         to="/"
+  //         style={{ textDecoration: 'none', color: 'inherit' }}
+  //         disablePadding
+  //       >
+  //         <ListItemButton>
+  //           <ListItemIcon>
+  //             <MailIcon />
+  //           </ListItemIcon>
+  //           <ListItemText primary="back" />
+  //         </ListItemButton>
+  //       </ListItem>
+  //     </List>
+  //     <Divider />
+  //   </div>
+  // );
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <List>
-        {['Alumnos', 'Actualizar Cuenta'].map((text, index) => (
+        {['Información Personal','Datos Pago', 'Actualizar Cuenta' ].map((text, index) => (
           <ListItem key={text} disablePadding>
             {text === 'Actualizar Cuenta' ? (
               <Link to="/profile/formulario" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <ListItemButton>
                   <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </Link>
+            ) : text === 'Información Personal' ? (
+              <Link to="/profile/informacion-personal" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <ListItemButton>
+                  <ListItemIcon><InboxIcon /></ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>
               </Link>
@@ -71,7 +128,6 @@ function Profile(props) {
       <Divider />
     </div>
   );
-
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
@@ -140,6 +196,7 @@ function Profile(props) {
       </Box>
     </Box>
   );
+  
 }
 
 Profile.propTypes = {

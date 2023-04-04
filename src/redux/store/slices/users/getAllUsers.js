@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setUserList, logoutUser, logUser, getUserById } from ".";
+import { setUserList, logoutUser, logUser, getUserById,getPaidById } from ".";
 import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
 const URL = "http://localhost:3001";
@@ -34,6 +34,21 @@ export const postNewUser = (user) => {
     }
   };
 };
+export const getUsersByIdName = (id,token) => {
+  return async (dispatch) => {
+    try {
+      let res = await axios.get(`${URL}/students/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(getUserById(res.data));
+      
+    } catch (error) {
+      console.log(error, "error by id");
+    }
+  };
+};
 //Get users by ID
 
 export const getUsersById = (id,token) => {
@@ -43,8 +58,8 @@ export const getUsersById = (id,token) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });console.log(res);
-      dispatch(getUserById(res.data));
+      });
+      dispatch(getPaidById(res.data));
       
     } catch (error) {
       console.log(error, "error by id");

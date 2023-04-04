@@ -6,6 +6,8 @@ import { styled } from "@mui/material"
 import Profile from "./views/profile/Profile"
 import Students from "./views/profile/Students"
 import Formulario from "./views/profile/Formulario"
+import Data from "./views/profile/Data"
+
 
 const Root = styled('div')({
   maxWidth: "1280px",
@@ -33,9 +35,10 @@ function App() {
         <Route exact path="/henrycollege/detalle/:id" element={<Detail />} />
         <Route exact path="/henrycollege/payment" element={<Payment />} />
         <Route path="/profile" element={<Profile />} >
-          <Route path="/profile" element={<Navigate replace to="students" />} />
+          <Route path="/profile" element={<Navigate replace to="informacion-personal" />} />
           <Route path="students" element={<Students />} />
           <Route path="formulario" element={<Formulario />} />
+          <Route path="informacion-personal" element={<Data />} />
         </Route>
       </Routes>
     </Root>
