@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/henrycollege" element={<SubLanding/>} />
           <Route exact path="/henrycollege/courses" element={<Home/>} />
           <Route exact path="/henrycollege/registrarse" element={<FormRegister/>} />
-          <Route exact path="/henrycollege/iniciarsesion" element={<Form/>} />
+          {/* <Route exact path="/henrycollege/iniciarsesion" element={<Form/>} /> */}
           <Route exact path="/henrycollege/nosotros" element={<About/>} />          
           <Route exact path="/henrycollege/detalle/:id" element={<Detail/>} />          
           <Route exact path="/henrycollege/payment" element={<Payment/>} />          

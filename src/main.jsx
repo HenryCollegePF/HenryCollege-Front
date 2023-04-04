@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -54,12 +54,6 @@ const darkTheme = createTheme({
 
 const persistor = persistStore(store);
 
-const onRedirectCallback = (appState) => {
-  history.push(
-    appState && appState.returnTo ? appState.returnTo : window.location.pathname
-  );
-};
-
 const AppWrapper = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -79,10 +73,10 @@ const AppWrapper = () => {
               <Auth0Provider
                 domain={import.meta.env.VITE_AUTH0_DOMAIN}
                 clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-                onRedirectCallback={onRedirectCallback}
                 authorizationParams={{
-                  redirect_uri: window.location.origin
+                  redirect_uri: `${window.location.origin}/henrycollege`
                 }}
+                cacheLocation="localstorage"
               >
                 <App sx={{ height: "100vh" }} />
               </Auth0Provider>
