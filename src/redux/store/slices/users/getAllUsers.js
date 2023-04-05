@@ -35,7 +35,7 @@ export const postNewUser = (user) => {
   };
 };
 export const changePassword = (id, token, password) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     try {
       await axios.put(`${URL}/students/reset-password/${id}`, {
         password: password
@@ -46,12 +46,12 @@ export const changePassword = (id, token, password) => {
       });
       alert("Por favor revisa tu email, para cambiar la contraseña");
     } catch (error) {
-      console.log("error_put_slice",error);
+      console.log("error_put_slice", error);
     }
   }
 }
 
-export const getUsersByIdName = (id,token) => {
+export const getUsersByIdName = (id, token) => {
   return async (dispatch) => {
     try {
       let res = await axios.get(`${URL}/students/${id}`, {
@@ -60,7 +60,7 @@ export const getUsersByIdName = (id,token) => {
         },
       });
       dispatch(getUserById(res.data));
-      
+
     } catch (error) {
       console.log(error, "error by id");
     }
@@ -68,7 +68,7 @@ export const getUsersByIdName = (id,token) => {
 };
 //Get users by ID
 
-export const getPaid = (id,token) => {
+export const getPaid = (id, token) => {
   return async (dispatch) => {
     try {
       let res = await axios.get(`${URL}/membership/${id}`, {
@@ -77,7 +77,7 @@ export const getPaid = (id,token) => {
         },
       });
       dispatch(getPaidById(res.data));
-      
+
     } catch (error) {
       console.log(error, "error by id");
     }
