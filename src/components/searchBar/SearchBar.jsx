@@ -68,13 +68,13 @@ export default function SearchBar() {
   return (
     <>
       <Box>
-        <AppBar position="static" color="secondary" sx={{ bgcolor: 'White' }}>
+        <AppBar position="static">
           <Toolbar>
             <IconButton
-              color="secondary"
+              // color="secondary"
               size="large"
               edge="start"
-              // color="inherit"
+              color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
             ></IconButton>
@@ -87,7 +87,7 @@ export default function SearchBar() {
             >
               ¿Que quieres aprender?
             </Typography>
-            <Search  sx={{ bgcolor: 'White' }}>
+            <Search>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>

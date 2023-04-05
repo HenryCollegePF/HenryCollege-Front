@@ -158,6 +158,14 @@ const Footer = () => {
                   <Typography variant="caption" component="a" color="secondary">
                     Trabaja en Henry
                   </Typography>
+                  <Typography
+                    variant="caption"
+                    component="a"
+                    color="secondary"
+                    href=""
+                  >
+                    Henry College Admin
+                  </Typography>
                 </Stack>
               </Grid>
               <Grid item xs={6} md={3}>

@@ -82,7 +82,6 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
               sx={{
                 textDecoration: "none",
                 mr: 1,
-                color: "black",
                 bgcolor: "#F0F0F0",
                   "&:hover": {
                     bgcolor: "#000000",
@@ -103,7 +102,6 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
             <Button
               sx={{
                 mr: 1,
-                color: "black",
                 bgcolor: "#F0F0F0",
                   "&:hover": {
                     bgcolor: "#000000",
@@ -124,7 +122,6 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
             <Button
               sx={{
                 mr: 1,
-                color: "black",
                 bgcolor: "#F0F0F0",
                   "&:hover": {
                     bgcolor: "#000000",
@@ -229,7 +226,6 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
             ml: 2,
             textDecoration: "none",
             mr: 1,
-            color: "black",
             bgcolor: "#F0F0F0",
                   "&:hover": {
                     bgcolor: "#000000",
