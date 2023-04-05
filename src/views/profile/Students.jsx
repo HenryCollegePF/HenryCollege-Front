@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
 import { getPaid } from "../../redux/store/slices/users/getAllUsers";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,9 +11,10 @@ import Typography from "@mui/material/Typography";
 function Students() {
   
   const dispatch = useDispatch();
-  const tokenId = useSelector((state) => state.userState.loggedUser.student.auth0Id)
+  const tokenId = useSelector((state) => state.userState.loggedUser.auth.access_token)
   const allUsers = useSelector((state) => state.userState.userPaid)
-  const token = useSelector((state) => state.userState.loggedUser.auth)
+  console.log(allUsers)
+  const token = useSelector((state) => state.userState.loggedUser.auth.access_token)
   useEffect(() => {
     dispatch(getPaid(tokenId,token)); 
   }, [dispatch]);

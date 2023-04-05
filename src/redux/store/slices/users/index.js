@@ -25,7 +25,7 @@ export const userSlice = createSlice({
     },
     getPaidById: (state,action) => {
       state.userPaid = action.payload
-    },
+    }
   },
 });
 
