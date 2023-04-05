@@ -38,7 +38,9 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
 
   const handlerLogout = async () => {
     dispatch(logout());
-    logout();
+    logout({
+      returnTo: window.location.origin,
+    });
     navigate("/henrycollege");
   };
 
