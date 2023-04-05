@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addMembership } from ".";
 
-const URL = "http://localhost:3001";
+const URL = import.meta.env.VITE_BACK_URL || "http://localhost:3001";
 
 export const postMembership = (data, userId) => {
   return async (dispatch) => {
