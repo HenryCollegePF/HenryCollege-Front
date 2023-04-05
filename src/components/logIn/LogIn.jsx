@@ -2,19 +2,7 @@ import React from "react";
 import { logUser } from "../../redux/store/slices/users";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
-<<<<<<< HEAD
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  GithubAuthProvider,
-} from "firebase/auth";
-import { auth } from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch } from "react-redux";
-=======
 import { useDispatch, useSelector } from "react-redux";
->>>>>>> 64f803d4cf43bc2e8d75aebaace773188685bb7e
 import { useNavigate } from "react-router-dom";
 import {
   loginUser,
@@ -34,15 +22,7 @@ const Login = () => {
   const handlerLogin = async () => {
     try {
       if (!user) {
-<<<<<<< HEAD
-        const signUpData = await signInWithPopup(auth, authType);
-        const dataSign = {
-          email: signUpData.user.email,
-          password: signUpData.user.uid,
-        }
-=======
         // Retrieve data from user useing auth0
->>>>>>> 64f803d4cf43bc2e8d75aebaace773188685bb7e
         dispatch(loginUser(dataSign));
 
         navigate("/henrycollege/courses");

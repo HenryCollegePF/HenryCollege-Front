@@ -59,27 +59,28 @@ const avatar = [
 ];
 
 const Item = styled(Paper)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  textAlign: 'center',
-  maxWidth: 300,
-  margin: 'auto',
-  marginTop: theme.spacing(2),
-  position: 'relative',
-  paddingTop: '120px',
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  margin: "auto",
+  marginTop: theme.spacing(1),
+  position: "relative",
+  paddingTop: "120px",
   backgroundColor: theme.palette.background.paper,
-  '& > *:first-child': {
-    position: 'absolute',
-    top: '-40px',
-    left: '50%',
-    transform: 'translateX(-50%)',
+  "& > *:first-child": {
+    position: "absolute",
+    top: "-40px",
+    left: "50%",
+    transform: "translateX(-50%)",
+  },
+  "& img": {
+    filter: theme.palette.mode === "dark" ? "brightness(75%)" : "none",
   },
   "& *": {
     color: theme.palette.text.primary,
   },
 }));
-
 
 const darkTheme = createTheme({ palette: { mode: "dark" } });
 const lightTheme = createTheme({ palette: { mode: "light" } });
@@ -87,19 +88,25 @@ const lightTheme = createTheme({ palette: { mode: "light" } });
 export default function Elevation() {
   return (
     <>
-      <Typography variant="h4" gutterBottom>Equipo Henry College</Typography>
-      <Box sx={{ mt: 6 }}>
-        <Grid container spacing={2} >
-          {[lightTheme? lightTheme:darkTheme].map((theme, index) => (
-            <Grid item xs={30} key={index}>
-              <ThemeProvider theme={theme}>
-                <Box
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns: { md: '1fr 1fr 1fr 1fr' },
-                    gap: 6,
-                    height: 350
-                  }}
+      <Typography variant="h4" gutterBottom sx={{ mt: 6 }}>
+        Equipo Henry College
+      </Typography>
+      <Box sx={{ mt: 2 }}>
+        {[lightTheme ? lightTheme : darkTheme].map((theme, index) => (
+          <ThemeProvider theme={theme}>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { md: "1fr 1fr 1fr 1fr" },
+                gap: 2,
+                height: 200,
+              }}
+            >
+              {avatar.map((elevation) => (
+                <Item
+                  key={elevation}
+                  elevation={elevation}
+                  sx={{ width: 200, height: 100 }}
                 >
                   <Avatar
                     src={elevation.imageUrl}
