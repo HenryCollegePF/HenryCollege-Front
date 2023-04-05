@@ -1,40 +1,34 @@
 import React from "react";
+import { logUser } from "../../redux/store/slices/users";
 import { Button } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
-  getAuth,
-  signInWithPopup,
-  signOut,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  GithubAuthProvider,
-} from "firebase/auth";
-import { auth } from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch } from "react-redux";
-import { loginUserFirebase } from "../../redux/store/slices/users/getAllUsers";
-// import axios from 'axios'
+  loginUser,
+} from "../../redux/store/slices/users/getAllUsers";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.userState);
+  const user = userState.loggedUser;
 
-  const [user, loading] = useAuthState(auth);
-  const googleAuth = new GoogleAuthProvider();
-  const facebookAuth = new FacebookAuthProvider();
-  const githubAuth = new GithubAuthProvider();
-  const auth1 = getAuth();
+  const navigate = useNavigate();
 
-  const handlerLogin = async (authType) => {
+  const googleAuth = () => {};
+  const facebookAuth = () => {};
+  const githubAuth = () => {};
+
+  const handlerLogin = async () => {
     try {
       if (!user) {
-        const signUpData = await signInWithPopup(auth, authType);
-        const dataFirebase = {
-          firstName: signUpData.user.displayName,
-          email: signUpData.user.email,
-          isExternal: true,
-          emailVerified: signUpData.user.emailVerified,
-        };
-        dispatch(loginUserFirebase(dataFirebase));
+        // Retrieve data from user useing auth0
+        dispatch(loginUser(dataSign));
+
+        navigate("/henrycollege/courses");
+
+        // Display welcome message
+        alert(`Bienvenido/a ${signUpData.user.displayName}!`);
       }
     } catch (error) {
       console.log(error);

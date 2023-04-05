@@ -2,7 +2,7 @@ import axios from "axios";
 import { setUserList, logoutUser, logUser, getUserById, getPaidById } from ".";
 import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
-const URL = "http://localhost:3001";
+const URL = import.meta.env.VITE_BACK_URL || "http://localhost:3001";
 
 //Get users
 
@@ -88,7 +88,6 @@ export const loginUser = (user) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${URL}/students/login`, user);
-
       setAuthToken(data.auth.access_token);
       dispatch(logUser(data));
     } catch (error) {
@@ -102,7 +101,6 @@ export const loginUser = (user) => {
 // const {firstName, email, isExternal} = user
 export const loginUserFirebase = (user) => {
   return async (dispatch) => {
-    
     try {
       const { data } = await axios.post(`${URL}/students/login`, user);
       setAuthToken(data.auth.access_token);

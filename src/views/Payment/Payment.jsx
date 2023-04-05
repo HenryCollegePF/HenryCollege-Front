@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Button,
-  Grid,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Hidden,
-} from "@mui/material";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postPayment } from "../../redux/store/slices/payment/paymentSlice";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
+import { postMembership } from "../../redux/store/slices/users/paymentSlice";
 
 const ProductDisplay = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userState);
 	const navigate = useNavigate();
-  const payment = useSelector((state) => state.paymentState);
   const [values, setValues] = useState({
     lookup_key: "20.00",
   });
@@ -44,12 +32,16 @@ const ProductDisplay = () => {
 
   const handleOrderApproved = async (data, actions) => {
     const paymentDetails = await actions.order.capture();
-    const name = paymentDetails.payer.name.given_name;
-    dispatch(postPayment(paymentDetails)); // => Va a decirle al back quien hizo la compra y el id de esa compra
+    dispatch(postMembership({
+      paymentId: paymentDetails.id,
+      pricePaid: paymentDetails.purchase_units[0].amount.value
+    }, user.loggedUser.id)); // => Va a decirle al back quien hizo la compra y el id de esa compra
 		navigate('/henrycollege/courses')
   };
 
-  if (payment.paid.status === "COMPLETED") {
+  const hasActiveMembership = user.loggedUser.Membership && new Date(user.loggedUser.Membership.expirationDate) >= new Date();
+
+  if (hasActiveMembership) {
     return (
 			<h1>Ya tienes una suscripcion activa</h1>
 		);

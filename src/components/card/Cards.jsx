@@ -21,9 +21,9 @@ export default function Cards({ id, name, image, level, tags, duration }) {
     },
   };
 
-  const paymentState = useSelector(state=>state.paymentState)
+  const userState = useSelector(state => state.userState)
 
-  const isPaid = paymentState.paid.status === "COMPLETED"
+  const isPaid = userState.loggedUser.Membership && new Date(userState.loggedUser.Membership.expirationDate) >= new Date();
 
   return (
     <Box
@@ -47,7 +47,7 @@ export default function Cards({ id, name, image, level, tags, duration }) {
         }}
         color="tertiary"
       >
-        <Link to={isPaid? `/henrycollege/detalle/${id}`: "/henrycollege/payment"} color="tertiary">
+        <Link to={isPaid ? `/henrycollege/detalle/${id}` : "/henrycollege/payment"} color="tertiary">
           <CardActionArea color="tertiary">
             <CardMedia
               sx={{ height: "130px", width: "80%", m: "auto", mt: "1rem" }}

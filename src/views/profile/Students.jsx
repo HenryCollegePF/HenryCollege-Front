@@ -11,12 +11,11 @@ import Typography from "@mui/material/Typography";
 function Students() {
   
   const dispatch = useDispatch();
-  const tokenId = useSelector((state) => state.userState.loggedUser.auth.access_token)
-  const allUsers = useSelector((state) => state.userState.userPaid)
-  console.log(allUsers)
+  const {id} = useSelector((state) => state.userState.loggedUser.student)
+  const paid = useSelector((state) => state.userState.userPaid)
   const token = useSelector((state) => state.userState.loggedUser.auth.access_token)
   useEffect(() => {
-    dispatch(getPaid(tokenId,token)); 
+    dispatch(getPaid(id,token)); 
   }, [dispatch]);
   
 return(
@@ -25,19 +24,19 @@ return(
         <Box sx={{ display: "flex", flexDirection: "column" }} m="30px">
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h5" color="text.tertiary" >
-             fecha de compra {allUsers.date}
+             fecha de compra {paid.date}
             </Typography>
           </CardContent>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h6" color="text.tertiary">
-              precio pagado : {allUsers.pricePaid}
+              precio pagado : {paid.pricePaid}
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               component="div"
             >
-              fecha de expiracion : {allUsers.expirationDate}
+              fecha de expiracion : {paid.expirationDate}
             </Typography>
           </CardContent>
         </Box>
