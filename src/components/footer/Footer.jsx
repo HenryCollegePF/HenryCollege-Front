@@ -162,7 +162,7 @@ const Footer = () => {
                     variant="caption"
                     component="a"
                     color="secondary"
-                    href=""
+                    href="https://henry-college-dashboard-g18b7d9oa-davemmweb.vercel.app/"
                   >
                     Henry College Admin
                   </Typography>
