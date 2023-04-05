@@ -6,6 +6,7 @@ import { Email, Lock, Edit, VpnKey } from '@material-ui/icons';
 import { useNavigate } from "react-router-dom";
 import { changePassword } from '../../redux/store/slices/users/getAllUsers';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAuthToken } from '../../utils/auth';
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -44,8 +45,8 @@ function Formulario() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.userState.loggedUser.auth.access_token);
-  const {id} = useSelector((state) => state.userState.loggedUser.student);
+  const token = getAuthToken();
+  const id = useSelector((state) => state.userState.loggedUser.auth0Id);
 
   const handleSubmit = (event) => {
     event.preventDefault();
