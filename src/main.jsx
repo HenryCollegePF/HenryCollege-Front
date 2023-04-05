@@ -7,8 +7,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore";
-import { Switch, Paper } from "@mui/material";
-import NavBar from "./components/navBar/NavBar";
+import { Paper } from "@mui/material";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const lightTheme = createTheme({

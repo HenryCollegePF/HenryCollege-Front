@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
 import { getUsersByIdName } from "../../redux/store/slices/users/getAllUsers";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,11 +10,9 @@ import { getAuthToken } from "../../utils/auth";
 
 
 function Data() {
-  
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userState.loggedUser);
   const token = getAuthToken();
-  console.log({dataUser: user, token})
   useEffect(() => {
     dispatch(getUsersByIdName(user.auth0Id, token)); 
   }, [dispatch]);

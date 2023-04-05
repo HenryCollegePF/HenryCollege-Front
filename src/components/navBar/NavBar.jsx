@@ -12,17 +12,11 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Switch,
-  Paper,
 } from "@mui/material";
-import { logout } from "../../redux/store/slices/users/getAllUsers";
 import { useDispatch } from "react-redux";
 import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
 import { useAuth0 } from "@auth0/auth0-react";
-// import Profile from "../../views/profile/Profile";
-
-const settings = ["Profile", "Logout"];
 
 const NavBar = ({ toggleDarkMode, isDarkMode }) => {
   const theme = useTheme();
@@ -31,19 +25,11 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
   const { loginWithRedirect, isAuthenticated, logout, isLoading } = useAuth0();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [darkMode, setDarkMode] = React.useState(false);
 
   const logoSrc = theme.palette.mode === "light" ? lightModeLogo : darkModeLogo;
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -52,7 +38,9 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
 
   const handlerLogout = async () => {
     dispatch(logout());
-    logout();
+    logout({
+      returnTo: window.location.origin,
+    });
     navigate("/henrycollege");
   };
 

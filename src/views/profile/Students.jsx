@@ -6,14 +6,14 @@ import { getPaid } from "../../redux/store/slices/users/getAllUsers";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { getAuthToken } from "../../utils/auth";
 
 
 function Students() {
-  
   const dispatch = useDispatch();
-  const {id} = useSelector((state) => state.userState.loggedUser.student)
+  const id = useSelector((state) => state.userState.loggedUser.id)
   const paid = useSelector((state) => state.userState.userPaid)
-  const token = useSelector((state) => state.userState.loggedUser.auth.access_token)
+  const token = getAuthToken();
   useEffect(() => {
     dispatch(getPaid(id,token)); 
   }, [dispatch]);
