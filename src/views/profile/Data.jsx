@@ -12,17 +12,14 @@ import Typography from "@mui/material/Typography";
 function Data() {
   
   const dispatch = useDispatch();
-  const {id} = useSelector((state) => state.userState.loggedUser.student)
-  console.log(id)
-  const dataUser = useSelector((state) => state.userState.loggedUser.student);
+  const token = useSelector((state) => state.userState.userById)
+  const dataUser = useSelector((state) => state.userState.userById);
   console.log(dataUser)
-  const token = useSelector((state) => state.userState.loggedUser.auth)
+  const tokenId = useSelector((state) => state.userState.userById)
   useEffect(() => {
-    dispatch(getUsersByIdName(id,token)); 
+    dispatch(getUsersByIdName(tokenId,token)); 
   }, [dispatch]);
-  return(
-    <h1></h1>
-  )
+ 
 return(
     <>
    <Card sx={{ display: "flex" }}>

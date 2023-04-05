@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Email, Lock, Edit, VpnKey } from '@material-ui/icons';
 import { useNavigate } from "react-router-dom";
+import { changePassword } from '../../redux/store/slices/users/getAllUsers';
+import { useDispatch, useSelector } from 'react-redux';
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -40,13 +42,15 @@ function Formulario() {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [newEmail, setNewEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.userState.loggedUser.auth.access_token);
+  const {id} = useSelector((state) => state.userState.loggedUser.student);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Lógica para enviar los datos del formulario al servidor
+    dispatch(changePassword(id,token,password))
   };
 
   const handleBack = (event) => {
@@ -80,27 +84,6 @@ function Formulario() {
             startAdornment: <Lock />,
           }}
         />
-        <TextField
-          className={classes.textField}
-          label="Nuevo email"
-          value={newEmail}
-          onChange={(event) => setNewEmail(event.target.value)}
-          variant="outlined"
-          InputProps={{
-            startAdornment: <Edit />,
-          }}
-        />
-        <TextField
-          className={classes.textField}
-          label="Nueva contraseña"
-          value={newPassword}
-          onChange={(event) => setNewPassword(event.target.value)}
-          variant="outlined"
-          type="password"
-          InputProps={{
-            startAdornment: <VpnKey />,
-          }}
-        />
         <div>
           <Button
             className={`${classes.button} ${classes.backButton}`}
@@ -110,7 +93,7 @@ function Formulario() {
           >
             Back
           </Button>
-          <Button className={classes.button} variant="contained" color="primary" type="submit">
+          <Button className={classes.button} variant="contained" color="primary" type="submit"onClick={handleSubmit}>
             Enviar
           </Button>
         </div>

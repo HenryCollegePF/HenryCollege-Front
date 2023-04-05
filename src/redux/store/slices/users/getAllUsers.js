@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setUserList, logoutUser, logUser, getUserById,getPaidById } from ".";
+import { setUserList, logoutUser, logUser, getUserById, getPaidById } from ".";
 import { getAuthToken, setAuthToken } from "../../../../utils/auth";
 
 const URL = "http://localhost:3001";
@@ -34,6 +34,23 @@ export const postNewUser = (user) => {
     }
   };
 };
+export const changePassword = (id, token, password) => {
+  return async(dispatch) => {
+    try {
+      await axios.put(`${URL}/students/reset-password/${id}`, {
+        password: password
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Por favor revisa tu email, para cambiar la contraseña");
+    } catch (error) {
+      console.log("error_put_slice",error);
+    }
+  }
+}
+
 export const getUsersByIdName = (id,token) => {
   return async (dispatch) => {
     try {
@@ -51,7 +68,7 @@ export const getUsersByIdName = (id,token) => {
 };
 //Get users by ID
 
-export const getUsersById = (id,token) => {
+export const getPaid = (id,token) => {
   return async (dispatch) => {
     try {
       let res = await axios.get(`${URL}/membership/${id}`, {

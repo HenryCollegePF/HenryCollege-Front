@@ -8,7 +8,7 @@ export const userSlice = createSlice({
     data: {},
     loggedUser: {},
     userById:[],
-    userPaid:[]
+    userPaid:[],
   },
   reducers: {
     setUserList: (state, action) => {
