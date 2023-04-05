@@ -7,6 +7,8 @@ export const userSlice = createSlice({
     list: [],
     data: {},
     loggedUser: {},
+    userById:[],
+    userPaid:[],
   },
   reducers: {
     setUserList: (state, action) => {
@@ -18,6 +20,12 @@ export const userSlice = createSlice({
     logUser: (state, action) => {
       state.loggedUser = action.payload;
     },
+    getUserById: (state,action) => {
+      state.userById = action.payload
+    },
+    getPaidById: (state,action) => {
+      state.userPaid = action.payload
+    },
     addMembership: (state, action) => {
       state.loggedUser = {
         ...state.loggedUser,
@@ -27,6 +35,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserList, logoutUser, logUser, addMembership } = userSlice.actions;
+export const { setUserList, logoutUser, logUser,getUserById,getPaidById,addMembership } = userSlice.actions;
 
 export default userSlice.reducer;

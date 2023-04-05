@@ -1,10 +1,10 @@
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import {
@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import darkModeLogo from "../../assets/images/logoHenryBlanco.jpg";
 import lightModeLogo from "../../assets/images/ISOLOGO_HENRY_BLACK.png";
 import { useAuth0 } from "@auth0/auth0-react";
+// import Profile from "../../views/profile/Profile";
 
 const settings = ["Profile", "Logout"];
 
@@ -55,6 +56,10 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
     navigate("/henrycollege");
   };
 
+  const handlerProfile = () => {
+    navigate("/profile");
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -83,14 +88,14 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
                 textDecoration: "none",
                 mr: 1,
                 bgcolor: "#F0F0F0",
-                  "&:hover": {
-                    bgcolor: "#000000",
-                    color: "#F0F0F0",
-                  },
-                  color: "#000000",
-                  "@media (min-width:600px)": {
-                    mr: 2,
-                  },
+                "&:hover": {
+                  bgcolor: "#000000",
+                  color: "#F0F0F0",
+                },
+                color: "#000000",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
               }}
               color="inherit"
             >
@@ -103,14 +108,14 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
               sx={{
                 mr: 1,
                 bgcolor: "#F0F0F0",
-                  "&:hover": {
-                    bgcolor: "#000000",
-                    color: "#F0F0F0",
-                  },
-                  color: "#000000",
-                  "@media (min-width:600px)": {
-                    mr: 2,
-                  },
+                "&:hover": {
+                  bgcolor: "#000000",
+                  color: "#F0F0F0",
+                },
+                color: "#000000",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
               }}
               color="inherit"
             >
@@ -123,14 +128,14 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
               sx={{
                 mr: 1,
                 bgcolor: "#F0F0F0",
-                  "&:hover": {
-                    bgcolor: "#000000",
-                    color: "#F0F0F0",
-                  },
-                  color: "#000000",
-                  "@media (min-width:600px)": {
-                    mr: 2,
-                  },
+                "&:hover": {
+                  bgcolor: "#000000",
+                  color: "#F0F0F0",
+                },
+                color: "#000000",
+                "@media (min-width:600px)": {
+                  mr: 2,
+                },
               }}
               color="inherit"
             >
@@ -208,13 +213,17 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" onClick={handlerLogout}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key="Profile" onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" onClick={handlerProfile}>
+                  Profile
+                </Typography>
+              </MenuItem>
+
+              <MenuItem key="Logout" onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" onClick={handlerLogout}>
+                  Logout
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         )}
@@ -227,14 +236,14 @@ const NavBar = ({ toggleDarkMode, isDarkMode }) => {
             textDecoration: "none",
             mr: 1,
             bgcolor: "#F0F0F0",
-                  "&:hover": {
-                    bgcolor: "#000000",
-                    color: "#F0F0F0",
-                  },
-                  color: "#000000",
-                  "@media (min-width:600px)": {
-                    mr: 2,
-                  },
+            "&:hover": {
+              bgcolor: "#000000",
+              color: "#F0F0F0",
+            },
+            color: "#000000",
+            "@media (min-width:600px)": {
+              mr: 2,
+            },
           }}
           color="inherit"
         >
