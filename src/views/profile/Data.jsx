@@ -7,17 +7,17 @@ import { getUsersByIdName } from "../../redux/store/slices/users/getAllUsers";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { getAuthToken } from "../../utils/auth";
 
 
 function Data() {
   
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.userState.userById)
-  const dataUser = useSelector((state) => state.userState.userById);
-  console.log(dataUser)
-  const tokenId = useSelector((state) => state.userState.userById)
+  const user = useSelector((state) => state.userState.loggedUser);
+  const token = getAuthToken();
+  console.log({dataUser: user, token})
   useEffect(() => {
-    dispatch(getUsersByIdName(tokenId,token)); 
+    dispatch(getUsersByIdName(user.auth0Id, token)); 
   }, [dispatch]);
  
 return(
@@ -26,24 +26,24 @@ return(
         <Box sx={{ display: "flex", flexDirection: "column" }} m="30px">
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h5" color="text.tertiary" >
-             Nombre: {dataUser.firstName}
+             Nombre: {user.firstName}
             </Typography>
           </CardContent>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h6" color="text.tertiary">
-               Apellido: {dataUser.lastName}
+               Apellido: {user.lastName}
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               component="div"
             >
-              email : {dataUser.email}
+              email : {user.email}
             </Typography>
           </CardContent>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h5" color="text.tertiary" >
-             Telefono: {dataUser.phone}
+             Telefono: {user.phone}
             </Typography>
           </CardContent>
         </Box>
